@@ -40,6 +40,8 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.material3.android)
+            implementation(libs.androidx.ui.text.google.fonts)
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
