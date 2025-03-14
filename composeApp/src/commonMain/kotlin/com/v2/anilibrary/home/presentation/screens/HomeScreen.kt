@@ -1,7 +1,10 @@
 package com.v2.anilibrary.home.presentation.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -48,6 +51,7 @@ import anilibrary.composeapp.generated.resources.ic_news_24
 import com.v2.anilibrary.home.presentation.HomeAction
 import com.v2.anilibrary.home.presentation.HomeState
 import com.v2.anilibrary.home.presentation.HomeViewModel
+import com.v2.anilibrary.home.presentation.rememberNavDrawerState
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -78,7 +82,7 @@ fun HomeScreen(
     onAction: (HomeAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val pagerState = rememberPagerState (initialPage = 1) { 3 }
+    val pagerState = rememberPagerState (initialPage = 0) { 3 }
 
     val tabPositions = remember { mutableStateListOf<TabPosition>() }
     val coroutineScope = rememberCoroutineScope()
@@ -88,6 +92,8 @@ fun HomeScreen(
     val tabIndicatorOffset = 12
 
     val density = LocalDensity.current
+
+    val drawerState = rememberNavDrawerState()
 
     LaunchedEffect(state.selectedTabIndex, pagerState.currentPage) {
         if (tabPositions.isNotEmpty()) {
@@ -122,115 +128,121 @@ fun HomeScreen(
 
     Scaffold (
         bottomBar = {
-            Column (
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = modifier
-                    .padding(bottom = 16.dp, start = 16.dp, end = 16.dp)
+            AnimatedVisibility(
+                visible = drawerState.drawerState.isClosed,
+                enter = fadeIn(),
+                exit = fadeOut()
             ) {
-                Surface(
-                    color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.8F),
-                    shape = RoundedCornerShape(30.dp),
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = modifier
-                        .fillMaxWidth()
+                        .padding(bottom = 16.dp, start = 16.dp, end = 16.dp)
                 ) {
-                    TabRow(
-                        selectedTabIndex = state.selectedTabIndex,
-                        indicator = { tabPositionsList ->
-                            tabPositions.clear()
-                            tabPositions.addAll(tabPositionsList)
-
-                            Box(
-                                modifier = modifier
-                                    .fillMaxSize()
-                            ) {
-                                Canvas(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                ) {
-                                    drawRoundRect(
-                                        color = tabColor.copy(alpha = 0.5F),
-                                        cornerRadius = CornerRadius(20.dp.toPx()),
-                                        topLeft = Offset(
-                                            startAnimate.value + tabIndicatorOffset,
-                                            0f + tabIndicatorOffset
-                                        ),
-                                        size = Size(
-                                            endAnimate.value - startAnimate.value - tabIndicatorOffset*2,
-                                            size.height - tabIndicatorOffset*2
-                                        )
-                                    )
-                                }
-                            }
-                        },
-                        divider = {},
-                        containerColor = Color.Transparent,
+                    Surface(
+                        color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.8F),
+                        shape = RoundedCornerShape(30.dp),
                         modifier = modifier
                             .fillMaxWidth()
-                            .padding(4.dp)
                     ) {
-                        CompositionLocalProvider(LocalRippleConfiguration provides null) {
-                            Tab(
-                                selected = state.selectedTabIndex == 0,
-                                onClick = {
-                                    onAction(HomeAction.OnTabSelected(0))
-                                    coroutineScope.launch {
-                                        pagerState.animateScrollToPage(0)
-                                    }
-                                },
-                                modifier = modifier
-                                    .weight(1f)
-                            ) {
-                                Image(
-                                    painterResource(Res.drawable.ic_news_24),
-                                    contentDescription = stringResource(Res.string.home_news),
-                                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
-                                    modifier = modifier
-                                        .padding(top = 12.dp, bottom = 12.dp)
-                                        .size(28.dp)
+                        TabRow(
+                            selectedTabIndex = state.selectedTabIndex,
+                            indicator = { tabPositionsList ->
+                                tabPositions.clear()
+                                tabPositions.addAll(tabPositionsList)
 
-                                )
-                            }
-
-                            Tab(
-                                selected = state.selectedTabIndex == 1,
-                                onClick = {
-                                    onAction(HomeAction.OnTabSelected(1))
-                                    coroutineScope.launch {
-                                        pagerState.animateScrollToPage(1)
-                                    }
-                                },
-                                modifier = modifier
-                                    .weight(1f)
-                            ) {
-                                Image(
-                                    painterResource(Res.drawable.ic_home_24),
-                                    contentDescription = stringResource(Res.string.home_main),
-                                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
+                                Box(
                                     modifier = modifier
-                                        .padding(top = 12.dp, bottom = 12.dp)
-                                        .size(28.dp)
-                                )
-                            }
-
-                            Tab(
-                                selected = state.selectedTabIndex == 2,
-                                onClick = {
-                                    onAction(HomeAction.OnTabSelected(2))
-                                    coroutineScope.launch {
-                                        pagerState.animateScrollToPage(2)
+                                        .fillMaxSize()
+                                ) {
+                                    Canvas(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                    ) {
+                                        drawRoundRect(
+                                            color = tabColor.copy(alpha = 0.5F),
+                                            cornerRadius = CornerRadius(20.dp.toPx()),
+                                            topLeft = Offset(
+                                                startAnimate.value + tabIndicatorOffset,
+                                                0f + tabIndicatorOffset
+                                            ),
+                                            size = Size(
+                                                endAnimate.value - startAnimate.value - tabIndicatorOffset*2,
+                                                size.height - tabIndicatorOffset*2
+                                            )
+                                        )
                                     }
-                                },
-                                modifier = modifier
-                                    .weight(1f)
-                            ) {
-                                Image(
-                                    painterResource(Res.drawable.ic_collection_24),
-                                    contentDescription = stringResource(Res.string.home_collection),
-                                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
+                                }
+                            },
+                            divider = {},
+                            containerColor = Color.Transparent,
+                            modifier = modifier
+                                .fillMaxWidth()
+                                .padding(4.dp)
+                        ) {
+                            CompositionLocalProvider(LocalRippleConfiguration provides null) {
+                                Tab(
+                                    selected = state.selectedTabIndex == 0,
+                                    onClick = {
+                                        onAction(HomeAction.OnTabSelected(0))
+                                        coroutineScope.launch {
+                                            pagerState.animateScrollToPage(0)
+                                        }
+                                    },
                                     modifier = modifier
-                                        .padding(top = 12.dp, bottom = 12.dp)
-                                        .size(28.dp)
-                                )
+                                        .weight(1f)
+                                ) {
+                                    Image(
+                                        painterResource(Res.drawable.ic_home_24),
+                                        contentDescription = stringResource(Res.string.home_main),
+                                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
+                                        modifier = modifier
+                                            .padding(top = 12.dp, bottom = 12.dp)
+                                            .size(28.dp)
+                                    )
+                                }
+
+                                Tab(
+                                    selected = state.selectedTabIndex == 1,
+                                    onClick = {
+                                        onAction(HomeAction.OnTabSelected(1))
+                                        coroutineScope.launch {
+                                            pagerState.animateScrollToPage(1)
+                                        }
+                                    },
+                                    modifier = modifier
+                                        .weight(1f)
+                                ) {
+                                    Image(
+                                        painterResource(Res.drawable.ic_news_24),
+                                        contentDescription = stringResource(Res.string.home_news),
+                                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
+                                        modifier = modifier
+                                            .padding(top = 12.dp, bottom = 12.dp)
+                                            .size(28.dp)
+
+                                    )
+                                }
+
+                                Tab(
+                                    selected = state.selectedTabIndex == 2,
+                                    onClick = {
+                                        onAction(HomeAction.OnTabSelected(2))
+                                        coroutineScope.launch {
+                                            pagerState.animateScrollToPage(2)
+                                        }
+                                    },
+                                    modifier = modifier
+                                        .weight(1f)
+                                ) {
+                                    Image(
+                                        painterResource(Res.drawable.ic_collection_24),
+                                        contentDescription = stringResource(Res.string.home_collection),
+                                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
+                                        modifier = modifier
+                                            .padding(top = 12.dp, bottom = 12.dp)
+                                            .size(28.dp)
+                                    )
+                                }
                             }
                         }
                     }
@@ -247,12 +259,11 @@ fun HomeScreen(
         ) { pageIndex ->
             Box(
                 modifier = modifier
-                    .fillMaxSize(),
-                contentAlignment = Alignment.Center
+                    .fillMaxSize()
             ) {
                 when (pageIndex) {
-                    0 -> HomeNewsScreen()
-                    1 -> HomeMainScreen()
+                    0 -> HomeMainScreen(state, drawerState, onAction)
+                    1 -> HomeNewsScreen()
                     2 -> HomeArchiveScreen()
                 }
             }

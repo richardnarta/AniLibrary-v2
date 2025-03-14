@@ -1,12 +1,13 @@
 package com.v2.anilibrary.home.presentation.screens
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import anilibrary.composeapp.generated.resources.Res
 import anilibrary.composeapp.generated.resources.home_collection
 import org.jetbrains.compose.resources.stringResource
@@ -15,11 +16,15 @@ import org.jetbrains.compose.resources.stringResource
 fun HomeArchiveScreen(
     modifier: Modifier = Modifier
 ) {
-    Text(
-        text = stringResource(Res.string.home_collection),
-        style = MaterialTheme.typography.headlineMedium,
-        textAlign = TextAlign.Center,
+    Box(
+        contentAlignment = Alignment.Center,
         modifier = modifier
-            .padding(vertical = 12.dp)
-    )
+            .fillMaxSize()
+    ) {
+        Text(
+            text = stringResource(Res.string.home_collection),
+            style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center
+        )
+    }
 }

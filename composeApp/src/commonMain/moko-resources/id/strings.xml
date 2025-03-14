@@ -1,0 +1,8 @@
+<resources>
+<!--    Component Strings-->
+    <string name="search_anime_hint_default">Lihat anime lainnya...</string>
+
+<!--   Content Descriptions -->
+    <string name="cd_close_search_hint">Bersihkan kueri di searchbar</string>
+    <string name="cd_open_navigation_drawer">Buka menu lainnya</string>
+</resources>
