@@ -1,4 +1,4 @@
-package com.v2.anilibrary.home.presentation.screens
+package com.v2.anilibrary.anime.presentation.home.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
@@ -48,10 +48,10 @@ import anilibrary.composeapp.generated.resources.home_news
 import anilibrary.composeapp.generated.resources.ic_collection_24
 import anilibrary.composeapp.generated.resources.ic_home_24
 import anilibrary.composeapp.generated.resources.ic_news_24
-import com.v2.anilibrary.home.presentation.HomeAction
-import com.v2.anilibrary.home.presentation.HomeState
-import com.v2.anilibrary.home.presentation.HomeViewModel
-import com.v2.anilibrary.home.presentation.rememberNavDrawerState
+import com.v2.anilibrary.anime.presentation.home.HomeAction
+import com.v2.anilibrary.anime.presentation.home.HomeState
+import com.v2.anilibrary.anime.presentation.home.HomeViewModel
+import com.v2.anilibrary.anime.presentation.home.rememberNavDrawerState
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -59,7 +59,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreenRoot(
-    viewModel: HomeViewModel = koinViewModel()
+    viewModel: HomeViewModel = koinViewModel<HomeViewModel>()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 

@@ -1,4 +1,4 @@
-package com.v2.anilibrary.home.domain
+package com.v2.anilibrary.anime.domain
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done

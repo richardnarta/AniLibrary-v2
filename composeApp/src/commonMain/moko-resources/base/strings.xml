@@ -5,4 +5,15 @@
 <!--    Content Descriptions-->
     <string name="cd_close_search_hint">Clear search</string>
     <string name="cd_open_navigation_drawer">Open Navigation Drawer</string>
+
+<!--    Error Message-->
+    <string name="error_disk_full">Oops, it seems like your disk is full.</string>
+    <string name="error_unknown">Oops, something went wrong.</string>
+    <string name="error_request_timeout">Request timeout, please try again.</string>
+    <string name="error_no_internet">No internet connection.</string>
+    <string name="error_too_many_request">Your quota seems to be exceeded.</string>
+    <string name="error_serialization">Parsing data failed.</string>
+
+<!--    Application-->
+    <string name="home_heading_top_airing">Top Airing TV Series</string>
 </resources>

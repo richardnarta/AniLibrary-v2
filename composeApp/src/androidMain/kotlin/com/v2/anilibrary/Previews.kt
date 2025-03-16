@@ -1,21 +1,20 @@
 package com.v2.anilibrary
 
+import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import com.v2.anilibrary.core.components.SearchBar
-import dev.icerock.moko.resources.compose.stringResource
+import com.v2.anilibrary.anime.presentation.components.AnimePagerItemSkeleton
+import com.v2.anilibrary.core.presentation.theme.AppTheme
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = Devices.PIXEL_4)
+@Preview(showBackground = true, device = Devices.PIXEL_4, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun SearchBarPreview(
+fun AnimePreview(
     modifier: Modifier = Modifier
 ) {
-    SearchBar(
-        query = "",
-        onQueryChange = {},
-        placeholder = stringResource(SharedRes.strings.search_anime_hint_default),
-        onImeSearch = {},
-        onIconClicked = {},
-    )
+    AppTheme {
+        AnimePagerItemSkeleton()
+    }
 }

@@ -1,4 +1,4 @@
-package com.v2.anilibrary.core.components
+package com.v2.anilibrary.core.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn

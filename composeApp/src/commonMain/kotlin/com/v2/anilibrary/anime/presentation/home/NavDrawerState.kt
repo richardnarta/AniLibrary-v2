@@ -1,4 +1,4 @@
-package com.v2.anilibrary.home.presentation
+package com.v2.anilibrary.anime.presentation.home
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue

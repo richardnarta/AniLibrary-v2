@@ -1,4 +1,4 @@
-package com.v2.anilibrary.home.presentation.screens
+package com.v2.anilibrary.anime.presentation.home.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,11 +9,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import anilibrary.composeapp.generated.resources.Res
-import anilibrary.composeapp.generated.resources.home_news
+import anilibrary.composeapp.generated.resources.home_collection
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun HomeNewsScreen(
+fun HomeArchiveScreen(
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -22,7 +22,7 @@ fun HomeNewsScreen(
             .fillMaxSize()
     ) {
         Text(
-            text = stringResource(Res.string.home_news),
+            text = stringResource(Res.string.home_collection),
             style = MaterialTheme.typography.headlineMedium,
             textAlign = TextAlign.Center
         )

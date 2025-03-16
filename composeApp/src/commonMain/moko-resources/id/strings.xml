@@ -5,4 +5,15 @@
 <!--   Content Descriptions -->
     <string name="cd_close_search_hint">Bersihkan kueri di searchbar</string>
     <string name="cd_open_navigation_drawer">Buka menu lainnya</string>
+
+<!--    Error Message-->
+    <string name="error_disk_full">Oops, memori anda penuh.</string>
+    <string name="error_unknown">Oops, terjadi kesalahan.</string>
+    <string name="error_request_timeout">Permintaan gagal, mohon coba lagi.</string>
+    <string name="error_no_internet">Tidak ada koneksi internet.</string>
+    <string name="error_too_many_request">Limit akses anda telah habis.</string>
+    <string name="error_serialization">Gagal mendapatkan data.</string>
+
+<!--    Application-->
+    <string name="home_heading_top_airing">Top Serial TV Saat Ini</string>
 </resources>
