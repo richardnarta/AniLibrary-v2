@@ -20,6 +20,7 @@ class HomeViewModel (
     val state = _state
         .onStart {
             getTopAiringAnime()
+            getCurrentSeasonAnime()
         }
         .stateIn(
             viewModelScope,
@@ -62,6 +63,30 @@ class HomeViewModel (
                     topAiringIsLoading = false,
                     topAiringIsError = true,
                     topAiringAnimeResults = emptyList()
+                ) }
+            }
+    }
+
+    private fun getCurrentSeasonAnime() = viewModelScope.launch {
+        _state.update { it.copy(
+            seasonAnimeIsLoading = true,
+            seasonAnimeIsError = false
+        ) }
+        animeRepository
+            .getCurrentSeasonAnime()
+            .onSuccess { seasonAnime ->
+                _state.update { it.copy(
+                    seasonAnimeIsLoading = false,
+                    seasonAnimeIsError = false,
+                    seasonAnimeResults = seasonAnime.distinctBy { anime -> anime.id },
+                    seasonAnime = seasonAnime[0].airingSeason
+                ) }
+            }
+            .onError {
+                _state.update { it.copy(
+                    seasonAnimeIsLoading = false,
+                    seasonAnimeIsError = true,
+                    seasonAnimeResults = emptyList()
                 ) }
             }
     }

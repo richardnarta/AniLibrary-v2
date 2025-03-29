@@ -47,7 +47,9 @@ data class AnimeDto(
         get() = airing?.string
 
     val airingSeason: String?
-        get() = if (season != null && year != null) "${season.uppercase()} $year" else null
+        get() = if (season != null && year != null)
+            "${season.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }} $year"
+        else null
 
     val broadcastTime: String?
         get() = broadcast?.string

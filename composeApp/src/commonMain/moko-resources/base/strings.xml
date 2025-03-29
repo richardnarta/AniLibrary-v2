@@ -1,6 +1,7 @@
 <resources>
 <!--    Component Strings-->
     <string name="search_anime_hint_default">Find more anime...</string>
+    <string name="tap_to_find_more_anime">Tap to find out more</string>
 
 <!--    Content Descriptions-->
     <string name="cd_close_search_hint">Clear search</string>
@@ -16,4 +17,12 @@
 
 <!--    Application-->
     <string name="home_heading_top_airing">Top Airing TV Series</string>
+    <string name="home_heading_current_season">%1$s Anime</string>
+
+<!--    Utilities-->
+    <string name="winter_with_year">Winter %1$s</string>
+    <string name="spring_with_year">Spring %1$s</string>
+    <string name="summer_with_year">Summer %1$s</string>
+    <string name="fall_with_year">Fall %1$s</string>
+    <string name="this_season">Current Season</string>
 </resources>

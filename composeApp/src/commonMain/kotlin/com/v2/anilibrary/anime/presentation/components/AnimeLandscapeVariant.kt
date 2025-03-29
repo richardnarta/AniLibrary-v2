@@ -42,7 +42,7 @@ import com.v2.anilibrary.core.utils.formatNumber
 import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
-fun AnimePagerItem(
+fun AnimeLandscapeVariant(
     anime: Anime,
     modifier: Modifier = Modifier
 ) {
@@ -218,7 +218,7 @@ fun AnimePagerItem(
 }
 
 @Composable
-fun AnimePagerItemSkeleton(
+fun AnimeLandscapeVariantSkeleton(
     modifier: Modifier = Modifier
 ) {
     OutlinedCard(

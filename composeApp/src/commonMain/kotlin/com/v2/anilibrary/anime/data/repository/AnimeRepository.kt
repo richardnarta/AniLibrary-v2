@@ -15,4 +15,16 @@ class AnimeRepository(
             dto.data.map { it.toAnime() }
         }
     }
+
+    override suspend fun getCurrentSeasonAnime(
+        filter: String,
+        page: Int,
+        limit: Int
+    ): Result<List<Anime>, DataError.Remote> {
+        return remoteAnimeDataSource.getCurrentSeasonAnime(
+            filter, page, limit
+        ).map { dto ->
+            dto.data.map { it.toAnime() }
+        }
+    }
 }

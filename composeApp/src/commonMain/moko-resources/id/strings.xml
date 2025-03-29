@@ -1,6 +1,7 @@
 <resources>
 <!--    Component Strings-->
     <string name="search_anime_hint_default">Lihat anime lainnya...</string>
+    <string name="tap_to_find_more_anime">Lihat lebih banyak</string>
 
 <!--   Content Descriptions -->
     <string name="cd_close_search_hint">Bersihkan kueri di searchbar</string>
@@ -16,4 +17,12 @@
 
 <!--    Application-->
     <string name="home_heading_top_airing">Top Serial TV Saat Ini</string>
+    <string name="home_heading_current_season">Anime Musim %1$s</string>
+
+<!--    Utilities-->
+    <string name="winter_with_year">Dingin %1$s</string>
+    <string name="spring_with_year">Semi %1$s</string>
+    <string name="summer_with_year">Panas %1$s</string>
+    <string name="fall_with_year">Gugur %1$s</string>
+    <string name="this_season">Ini</string>
 </resources>
