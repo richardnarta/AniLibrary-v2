@@ -18,6 +18,7 @@
 <!--    Application-->
     <string name="home_heading_top_airing">Top Serial TV Saat Ini</string>
     <string name="home_heading_current_season">Anime Musim %1$s</string>
+    <string name="home_heading_top_rating">Rating Tertinggi</string>
 
 <!--    Utilities-->
     <string name="winter_with_year">Dingin %1$s</string>

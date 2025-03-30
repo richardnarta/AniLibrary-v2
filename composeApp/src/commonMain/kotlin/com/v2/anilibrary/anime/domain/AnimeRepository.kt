@@ -4,10 +4,15 @@ import com.v2.anilibrary.core.domain.DataError
 import com.v2.anilibrary.core.domain.Result
 
 interface AnimeRepository {
-    suspend fun getTopAiringAnime(): Result<List<Anime>, DataError.Remote>
+    suspend fun getTopAnime(
+        type: AnimeType,
+        filter: AnimeFilter,
+        page: Int = 1,
+        limit: Int = 10
+    ): Result<List<Anime>, DataError.Remote>
 
     suspend fun getCurrentSeasonAnime(
-        filter: String = "tv",
+        type: AnimeType = AnimeType.TV,
         page: Int = 1,
         limit: Int = 10
     ): Result<List<Anime>, DataError.Remote>

@@ -16,4 +16,8 @@ data class HomeState(
     val seasonAnimeResults: List<Anime> = emptyList(),
     val seasonAnimeIsLoading: Boolean = true,
     val seasonAnimeIsError: Boolean = false,
+
+    val topRatingAnimeResults: List<Anime> = emptyList(),
+    val topRatingIsLoading: Boolean = true,
+    val topRatingIsError: Boolean = false,
 )

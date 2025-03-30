@@ -241,14 +241,14 @@ fun HomeMainScreen(
                                         modifier = modifier
                                             .fillMaxWidth()
                                     ) {
-                                        items(6) { index ->
-                                            if (index == 5) {
+                                        items(7) { index ->
+                                            if (index == 6) {
                                                 MoreAnimePortraitVariant(
                                                     arrayListOf(
-                                                        state.seasonAnimeResults[6].images,
-                                                        state.seasonAnimeResults[7].images,
-                                                        state.seasonAnimeResults[8].images,
-                                                        state.seasonAnimeResults[9].images
+                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 4].images,
+                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 3].images,
+                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 2].images,
+                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 1].images
                                                     )
                                                 )
                                             } else {
@@ -262,6 +262,63 @@ fun HomeMainScreen(
 
                                 androidx.compose.animation.AnimatedVisibility(
                                     visible = (state.seasonAnimeIsLoading && !state.seasonAnimeIsError),
+                                    enter = fadeIn(),
+                                    exit = fadeOut()
+                                ) {
+                                    LazyRow(
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                        contentPadding = PaddingValues(horizontal = 16.dp),
+                                        modifier = modifier
+                                            .fillMaxWidth()
+                                    ) {
+                                        items(6) {
+                                            AnimePortraitVariantSkeleton()
+                                        }
+                                    }
+                                }
+                            }
+
+                            Spacer(modifier = modifier.padding(top = 32.dp))
+
+                            HeadingTitle(
+                                text = stringResource(SharedRes.strings.home_heading_top_rating)
+                            )
+
+                            Spacer(modifier = modifier.padding(top = 16.dp))
+
+                            Box {
+                                androidx.compose.animation.AnimatedVisibility(
+                                    visible = (!state.topRatingIsLoading && !state.topRatingIsError),
+                                    enter = fadeIn(),
+                                    exit = fadeOut()
+                                ) {
+                                    LazyRow(
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                        contentPadding = PaddingValues(horizontal = 16.dp),
+                                        modifier = modifier
+                                            .fillMaxWidth()
+                                    ) {
+                                        items(7) { index ->
+                                            if (index == 6) {
+                                                MoreAnimePortraitVariant(
+                                                    arrayListOf(
+                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 4].images,
+                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 3].images,
+                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 2].images,
+                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 1].images
+                                                    )
+                                                )
+                                            } else {
+                                                AnimePortraitVariant(
+                                                    state.topRatingAnimeResults[index]
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+
+                                androidx.compose.animation.AnimatedVisibility(
+                                    visible = (state.topRatingIsLoading && !state.topRatingIsError),
                                     enter = fadeIn(),
                                     exit = fadeOut()
                                 ) {

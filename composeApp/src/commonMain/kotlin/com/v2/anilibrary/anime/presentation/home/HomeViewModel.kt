@@ -2,7 +2,9 @@ package com.v2.anilibrary.anime.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.v2.anilibrary.anime.domain.AnimeFilter
 import com.v2.anilibrary.anime.domain.AnimeRepository
+import com.v2.anilibrary.anime.domain.AnimeType
 import com.v2.anilibrary.core.domain.onError
 import com.v2.anilibrary.core.domain.onSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,6 +23,7 @@ class HomeViewModel (
         .onStart {
             getTopAiringAnime()
             getCurrentSeasonAnime()
+            getTopRatingAnime()
         }
         .stateIn(
             viewModelScope,
@@ -50,7 +53,10 @@ class HomeViewModel (
             topAiringIsError = false
         ) }
         animeRepository
-            .getTopAiringAnime()
+            .getTopAnime(
+                type = AnimeType.TV,
+                filter = AnimeFilter.AIRING
+            )
             .onSuccess { topAiringAnime ->
                 _state.update { it.copy(
                     topAiringIsLoading = false,
@@ -87,6 +93,32 @@ class HomeViewModel (
                     seasonAnimeIsLoading = false,
                     seasonAnimeIsError = true,
                     seasonAnimeResults = emptyList()
+                ) }
+            }
+    }
+
+    private fun getTopRatingAnime() = viewModelScope.launch {
+        _state.update { it.copy(
+            topRatingIsLoading = true,
+            topRatingIsError = false
+        ) }
+        animeRepository
+            .getTopAnime(
+                type = AnimeType.EMPTY,
+                filter = AnimeFilter.EMPTY
+            )
+            .onSuccess { topRating ->
+                _state.update { it.copy(
+                    topRatingIsLoading = false,
+                    topRatingIsError = false,
+                    topRatingAnimeResults = topRating.distinctBy { anime -> anime.id },
+                ) }
+            }
+            .onError {
+                _state.update { it.copy(
+                    topRatingIsLoading = false,
+                    topRatingIsError = true,
+                    topRatingAnimeResults = emptyList()
                 ) }
             }
     }

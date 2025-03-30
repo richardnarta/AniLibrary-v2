@@ -3,6 +3,8 @@ package com.v2.anilibrary.anime.data.repository
 import com.v2.anilibrary.anime.data.mappers.toAnime
 import com.v2.anilibrary.anime.data.network.RemoteAnimeDataSource
 import com.v2.anilibrary.anime.domain.Anime
+import com.v2.anilibrary.anime.domain.AnimeFilter
+import com.v2.anilibrary.anime.domain.AnimeType
 import com.v2.anilibrary.core.domain.DataError
 import com.v2.anilibrary.core.domain.Result
 import com.v2.anilibrary.core.domain.map
@@ -10,19 +12,26 @@ import com.v2.anilibrary.core.domain.map
 class AnimeRepository(
     private val remoteAnimeDataSource: RemoteAnimeDataSource
 ): com.v2.anilibrary.anime.domain.AnimeRepository {
-    override suspend fun getTopAiringAnime(): Result<List<Anime>, DataError.Remote> {
-        return remoteAnimeDataSource.getTopAiringAnime().map { dto ->
+    override suspend fun getTopAnime(
+        type: AnimeType,
+        filter: AnimeFilter,
+        page: Int,
+        limit: Int
+    ): Result<List<Anime>, DataError.Remote> {
+        return remoteAnimeDataSource.getTopAnime(
+            type, filter, page, limit
+        ).map { dto ->
             dto.data.map { it.toAnime() }
         }
     }
 
     override suspend fun getCurrentSeasonAnime(
-        filter: String,
+        type: AnimeType,
         page: Int,
         limit: Int
     ): Result<List<Anime>, DataError.Remote> {
         return remoteAnimeDataSource.getCurrentSeasonAnime(
-            filter, page, limit
+            type, page, limit
         ).map { dto ->
             dto.data.map { it.toAnime() }
         }
