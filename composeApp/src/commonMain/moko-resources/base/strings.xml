@@ -19,6 +19,7 @@
     <string name="home_heading_top_airing">Top Airing TV Series</string>
     <string name="home_heading_current_season">%1$s Anime</string>
     <string name="home_heading_top_rating">Top Rating Anime</string>
+    <string name="home_heading_upcoming">Upcoming Anime</string>
 
 <!--    Utilities-->
     <string name="winter_with_year">Winter %1$s</string>

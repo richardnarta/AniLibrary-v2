@@ -6,7 +6,7 @@ data class Anime(
     val title: String,
     val jpTitle: String?,
     val enTitle: String?,
-    val type: String,
+    val type: String?,
     val source: String?,
     val episodeCount: Int?,
     val status: String,

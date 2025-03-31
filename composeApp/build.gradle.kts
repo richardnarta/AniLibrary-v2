@@ -72,6 +72,9 @@ kotlin {
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.coil)
             implementation(libs.moko.resources)
+
+            implementation(libs.paging.compose.common)
+            implementation(libs.paging.common)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)

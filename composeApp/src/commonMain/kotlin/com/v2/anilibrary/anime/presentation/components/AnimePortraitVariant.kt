@@ -149,8 +149,10 @@ fun AnimePortraitVariant(
                             modifier = modifier
                                 .padding(horizontal = 8.dp)
                         ) {
-                            val episodes = if (anime.type in listOf("TV", "ONA", "OVA", "tv", "ona", "ova")) {
+                            val episodes = if (!anime.type.isNullOrEmpty() && anime.type in listOf("TV", "ONA", "OVA", "tv", "ona", "ova")) {
                                 "${anime.type.uppercase()} " + if (anime.episodeCount != null) "(${anime.episodeCount} Eps)" else "(? Eps)"
+                            } else if (anime.type.isNullOrEmpty()) {
+                                "?"
                             } else {
                                 anime.type.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
                             }

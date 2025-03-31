@@ -8,7 +8,7 @@ data class AnimeDto(
     @SerialName("mal_id") val id: Int,
     @SerialName("images") val images: AnimeCoverType?,
     @SerialName("titles") val titles: List<AnimeTitleVariant>,
-    @SerialName("type") val type: String,
+    @SerialName("type") val type: String?,
     @SerialName("source") val source: String?,
     @SerialName("episodes") val episodeCount: Int?,
     @SerialName("status") val status: String,

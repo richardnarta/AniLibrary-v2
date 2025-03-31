@@ -2,6 +2,8 @@ package com.v2.anilibrary.anime.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.cash.paging.Pager
+import com.v2.anilibrary.anime.domain.Anime
 import com.v2.anilibrary.anime.domain.AnimeFilter
 import com.v2.anilibrary.anime.domain.AnimeRepository
 import com.v2.anilibrary.anime.domain.AnimeType
@@ -15,7 +17,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel (
-    private val animeRepository: AnimeRepository
+    private val animeRepository: AnimeRepository,
+    private val upcomingAnimePager: Pager<Int, Anime>
 ): ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
@@ -121,5 +124,11 @@ class HomeViewModel (
                     topRatingAnimeResults = emptyList()
                 ) }
             }
+    }
+
+    fun getUpcomingAnime() = viewModelScope.launch {
+        _state.update { it.copy(
+            upcomingAnimeResults = upcomingAnimePager.flow
+        ) }
     }
 }

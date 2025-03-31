@@ -334,6 +334,14 @@ fun HomeMainScreen(
                                     }
                                 }
                             }
+
+                            Spacer(modifier = modifier.padding(top = 32.dp))
+
+                            HeadingTitle(
+                                text = stringResource(SharedRes.strings.home_heading_upcoming)
+                            )
+
+                            Spacer(modifier = modifier.padding(top = 16.dp))
                         }
                     }
                 }
