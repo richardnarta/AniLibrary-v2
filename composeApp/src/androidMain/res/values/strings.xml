@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">AniLibrary</string>
+    <string name="app_name" translatable="false">AniLibrary</string>
+    <string name="prequel" translatable="false">Prequel</string>
+    <string name="sequel" translatable="false">Sequel</string>
+    <string name="adaptation" translatable="false">Adaptation</string>
 </resources>

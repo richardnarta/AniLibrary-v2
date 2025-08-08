@@ -1,0 +1,37 @@
+<resources>
+    <!--    Dummy Anime-->
+    <string name="dummy_anime_images" translatable="false">https://cdn.myanimelist.net/images/anime/1775/109514l.jpg</string>
+    <string name="dummy_anime_title" translatable="false">5-toubun no Hanayome ∬</string>
+    <string name="dummy_anime_jp_title" translatable="false">五等分の花嫁∬</string>
+    <string name="dummy_anime_en_title" translatable="false">The Quintessential Quintuplets 2</string>
+    <string name="dummy_anime_type" translatable="false">TV</string>
+    <string name="dummy_anime_source" translatable="false">Manga</string>
+    <string name="dummy_anime_episodes" translatable="false">12</string>
+    <string name="dummy_anime_status" translatable="false">Finished Airing</string>
+    <string name="dummy_anime_airing_date" translatable="false">Jan 8, 2021 to Mar 26, 2021</string>
+    <string name="dummy_anime_duration" translatable="false">24 min per ep</string>
+    <string name="dummy_anime_age_rating" translatable="false">PG-13 - Teens 13 or older</string>
+    <string name="dummy_anime_rating" translatable="false">8.02</string>
+    <string name="dummy_anime_rating_user" translatable="false">461755</string>
+    <string name="dummy_anime_rank" translatable="false">636</string>
+    <string name="dummy_anime_synopsis" translatable="false">Through their tutor Fuutarou Uesugi\'s diligent guidance, the Nakano quintuplets\' academic performance shows signs of improvement, even if their path to graduation is still rocky. However, as they continue to cause various situations that delay any actual tutoring, Fuutarou becomes increasingly involved with their personal lives, further complicating their relationship with each other.\n\nOn another note, Fuutarou slowly begins to realize the existence of a possible connection between him and the past he believes to have shared with one of the five girls. With everyone\'s feelings beginning to develop and overlap, will they be able to keep their bond strictly to that of a teacher and his students—or will it mature into something else entirely?\n\n[Written by MAL Rewrite]</string>
+    <string name="dummy_anime_season" translatable="false">winter 2021</string>
+    <string name="dummy_anime_broadcast" translatable="false">Fridays at 01:28 (JST)</string>
+    <string name="dummy_anime_studio_1" translatable="false">Bibury Animation Studios</string>
+    <string name="dummy_anime_genre_1" translatable="false">Comedy</string>
+    <string name="dummy_anime_genre_2" translatable="false">Romance</string>
+    <string name="dummy_anime_theme_1" translatable="false">Harem</string>
+    <string name="dummy_anime_theme_2" translatable="false">School</string>
+    <string name="dummy_anime_demographic" translatable="false">Shounen</string>
+    <string name="dummy_anime_prequel" translatable="false">5-toubun no Hanayome</string>
+    <string name="dummy_anime_sequel" translatable="false">5-toubun no Hanayome Movie</string>
+    <string name="dummy_anime_adaptation" translatable="false">5-toubun no Hanayome</string>
+    <string name="dummy_anime_opening" translatable="false">"Gotoubun no Katachi (五等分のカタチ)" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
+    <string name="dummy_anime_ending_1" translatable="false">"Hatsukoi (はつこい)\" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
+    <string name="dummy_anime_ending_2" translatable="false">"Go-toubun no Kimochi (五等分の気持ち)\" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase) (eps 12)</string>
+    <string name="dummy_anime_official_site" translatable="false">http://www.tbs.co.jp/anime/5hanayome/2nd/</string>
+    <string name="dummy_anime_x" translatable="false">\@5Hanayome_anime</string>
+    <string name="dummy_anime_x_url" translatable="false">https://twitter.com/5Hanayome_anime</string>
+    <string name="dummy_anime_streaming_platform_1" translatable="false">Crunchyroll</string>
+    <string name="dummy_anime_streaming_platform_2" translatable="false">Bilibili</string>
+</resources>

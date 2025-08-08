@@ -1,3 +1,4 @@
+import dev.icerock.gradle.MRVisibility
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -10,6 +11,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.moko)
 }
 
 kotlin {
@@ -69,6 +71,10 @@ kotlin {
 
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.coil)
+            implementation(libs.moko.resources)
+
+            implementation(libs.paging.compose.common)
+            implementation(libs.paging.common)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -88,7 +94,7 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
     packaging {
         resources {
@@ -110,3 +116,7 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
+multiplatformResources {
+    resourcesPackage.set("com.v2.anilibrary")
+    resourcesClassName.set("SharedRes")
+}

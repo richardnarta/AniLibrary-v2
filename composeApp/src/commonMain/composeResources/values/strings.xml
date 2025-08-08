@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="home_main">Home</string>
+    <string name="home_news">News</string>
+    <string name="home_collection">Collection</string>
+</resources>

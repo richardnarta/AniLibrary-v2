@@ -1,0 +1,30 @@
+<resources>
+<!--    Component Strings-->
+    <string name="search_anime_hint_default">Find more anime...</string>
+    <string name="tap_to_find_more_anime">Tap to find out more</string>
+
+<!--    Content Descriptions-->
+    <string name="cd_close_search_hint">Clear search</string>
+    <string name="cd_open_navigation_drawer">Open Navigation Drawer</string>
+
+<!--    Error Message-->
+    <string name="error_disk_full">Oops, it seems like your disk is full.</string>
+    <string name="error_unknown">Oops, something went wrong.</string>
+    <string name="error_request_timeout">Request timeout, please try again.</string>
+    <string name="error_no_internet">No internet connection.</string>
+    <string name="error_too_many_request">Your quota seems to be exceeded.</string>
+    <string name="error_serialization">Parsing data failed.</string>
+
+<!--    Application-->
+    <string name="home_heading_top_airing">Top Airing TV Series</string>
+    <string name="home_heading_current_season">%1$s Anime</string>
+    <string name="home_heading_top_rating">Top Rating Anime</string>
+    <string name="home_heading_upcoming">Upcoming Anime</string>
+
+<!--    Utilities-->
+    <string name="winter_with_year">Winter %1$s</string>
+    <string name="spring_with_year">Spring %1$s</string>
+    <string name="summer_with_year">Summer %1$s</string>
+    <string name="fall_with_year">Fall %1$s</string>
+    <string name="this_season">Current Season</string>
+</resources>
