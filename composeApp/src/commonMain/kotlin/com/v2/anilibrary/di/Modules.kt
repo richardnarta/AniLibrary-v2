@@ -24,7 +24,7 @@ val sharedModule = module {
 
     factory(named("UpcomingPager")) {
         Pager(
-            config = PagingConfig(pageSize = 4),
+            config = PagingConfig(pageSize = 25, initialLoadSize = 25),
             pagingSourceFactory = { UpcomingAnimePagingSource(get()) }
         )
     }

@@ -18,11 +18,10 @@ abstract class JikanPagingDataSource<Value : Any> : PagingSource<Int, Value>() {
         return try {
             val response = fetchData(currentPage, limit)
             PagingSourceLoadResultPage(
-                data = response.data,
+                data = response.data.distinctBy { it },
                 prevKey = if (currentPage == 1) null else currentPage - 1,
                 nextKey =  (currentPage + 1).takeIf { response.hasNextPage }
             )
-
         } catch (e: Exception) {
             PagingSourceLoadResultError(e)
         }

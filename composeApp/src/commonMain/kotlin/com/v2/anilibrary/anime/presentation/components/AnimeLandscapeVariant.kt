@@ -49,7 +49,6 @@ fun AnimeLandscapeVariant(
     OutlinedCard(
         shape = RoundedCornerShape(40.dp),
         modifier = modifier
-            .padding(horizontal = 16.dp)
             .fillMaxWidth()
             .aspectRatio(1.67F)
     ) {
@@ -201,7 +200,7 @@ fun AnimeLandscapeVariant(
                     }
 
                     Text(
-                        text = anime.synopsis,
+                        text = anime.synopsis ?: "No synopsis",
                         overflow = TextOverflow.Ellipsis,
                         fontSize = 10.sp,
                         lineHeight = 12.sp,
@@ -224,7 +223,6 @@ fun AnimeLandscapeVariantSkeleton(
     OutlinedCard(
         shape = RoundedCornerShape(40.dp),
         modifier = modifier
-            .padding(horizontal = 16.dp)
             .padding(top = 16.dp)
             .fillMaxWidth()
             .aspectRatio(1.67F)

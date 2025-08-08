@@ -18,7 +18,7 @@ data class AnimeDto(
     @SerialName("score") val rating: Double?,
     @SerialName("scored_by") val ratingUserCount: Int?,
     @SerialName("rank") val rank: Int?,
-    @SerialName("synopsis") val synopsis: String,
+    @SerialName("synopsis") val synopsis: String?,
     @SerialName("season") val season: String?,
     @SerialName("year") val year: Int?,
     @SerialName("broadcast") val broadcast: AnimeBroadcastInfo?,

@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalRippleConfiguration
@@ -40,6 +38,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.unit.dp
 import anilibrary.composeapp.generated.resources.Res
 import anilibrary.composeapp.generated.resources.home_main
+import app.cash.paging.compose.collectAsLazyPagingItems
 import com.v2.anilibrary.SharedRes
 import com.v2.anilibrary.anime.domain.mainScreenMenu
 import com.v2.anilibrary.anime.presentation.components.AnimeLandscapeVariant
@@ -47,6 +46,7 @@ import com.v2.anilibrary.anime.presentation.components.AnimeLandscapeVariantSkel
 import com.v2.anilibrary.anime.presentation.components.AnimePortraitVariant
 import com.v2.anilibrary.anime.presentation.components.AnimePortraitVariantSkeleton
 import com.v2.anilibrary.anime.presentation.components.MoreAnimePortraitVariant
+import com.v2.anilibrary.anime.presentation.components.VerticalGridPagingList
 import com.v2.anilibrary.anime.presentation.home.HomeAction
 import com.v2.anilibrary.anime.presentation.home.HomeState
 import com.v2.anilibrary.anime.presentation.home.NavDrawerState
@@ -130,218 +130,226 @@ fun HomeMainScreen(
                                 .padding(16.dp)
                         )
 
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = modifier
-                                .fillMaxWidth()
-                                .verticalScroll(rememberScrollState())
-                                .padding(bottom = 96.dp)
-                        ) {
-                            HeadingTitle(
-                                text = stringResource(SharedRes.strings.home_heading_top_airing)
-                            )
-
-                            Box {
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = (!state.topAiringIsLoading && !state.topAiringIsError),
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
+                        VerticalGridPagingList(
+                            header = {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    modifier = modifier
+                                        .fillMaxWidth()
                                 ) {
-                                    HorizontalPager(
-                                        state = pagerState,
+                                    HeadingTitle(
+                                        text = stringResource(SharedRes.strings.home_heading_top_airing),
                                         modifier = modifier
                                             .padding(top = 16.dp)
-                                    ) { pageIndex ->
-                                        AnimeLandscapeVariant(
-                                            anime = state.topAiringAnimeResults[pageIndex % state.topAiringAnimeResults.size]
-                                        )
-                                    }
-                                }
+                                    )
 
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = (state.topAiringIsLoading && !state.topAiringIsError),
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
-                                ) {
-                                    AnimeLandscapeVariantSkeleton()
-                                }
-                            }
-
-                            Spacer(modifier = modifier.padding(top = 16.dp))
-
-                            Surface(
-                                modifier = modifier
-                                    .height(10.dp)
-                            ) {
-                                TabRow(
-                                    selectedTabIndex = if (state.topAiringAnimeResults.isEmpty()) -1 else state.selectedTopAiringAnime,
-                                    indicator = {},
-                                    divider = {},
-                                    containerColor = Color.Transparent,
-                                    modifier = modifier
-                                        .widthIn(max = 120.dp)
-                                ) {
-                                    CompositionLocalProvider(LocalRippleConfiguration provides null) {
-                                        for (i in 0 until if (state.topAiringAnimeResults.isEmpty()) 10 else state.topAiringAnimeResults.size) {
-                                            Tab(
-                                                selected = false,
-                                                onClick = {},
+                                    Box {
+                                        androidx.compose.animation.AnimatedVisibility(
+                                            visible = (!state.topAiringIsLoading && !state.topAiringIsError),
+                                            enter = fadeIn(),
+                                            exit = fadeOut()
+                                        ) {
+                                            HorizontalPager(
+                                                state = pagerState,
                                                 modifier = modifier
-                                                    .weight(1f)
-                                            ) {
-                                                if (state.selectedTopAiringAnime == i && state.topAiringAnimeResults.isNotEmpty()) {
-                                                    Image(
-                                                        painter = painterResource(SharedRes.images.ic_pager_indicator_on),
-                                                        contentDescription = org.jetbrains.compose.resources.stringResource(
-                                                            Res.string.home_main),
-                                                        colorFilter = ColorFilter.tint(if (isDarkTheme()) skeletonLight else skeletonDark),
+                                                    .padding(top = 16.dp)
+                                            ) { pageIndex ->
+                                                AnimeLandscapeVariant(
+                                                    anime = state.topAiringAnimeResults[pageIndex % state.topAiringAnimeResults.size]
+                                                )
+                                            }
+                                        }
+
+                                        androidx.compose.animation.AnimatedVisibility(
+                                            visible = (state.topAiringIsLoading && !state.topAiringIsError),
+                                            enter = fadeIn(),
+                                            exit = fadeOut()
+                                        ) {
+                                            AnimeLandscapeVariantSkeleton()
+                                        }
+                                    }
+
+                                    Spacer(modifier = modifier.padding(top = 16.dp))
+
+                                    Surface(
+                                        modifier = modifier
+                                            .height(10.dp)
+                                    ) {
+                                        TabRow(
+                                            selectedTabIndex = if (state.topAiringAnimeResults.isEmpty()) -1 else state.selectedTopAiringAnime,
+                                            indicator = {},
+                                            divider = {},
+                                            containerColor = Color.Transparent,
+                                            modifier = modifier
+                                                .widthIn(max = 120.dp)
+                                        ) {
+                                            CompositionLocalProvider(LocalRippleConfiguration provides null) {
+                                                for (i in 0 until if (state.topAiringAnimeResults.isEmpty()) 10 else state.topAiringAnimeResults.size) {
+                                                    Tab(
+                                                        selected = false,
+                                                        onClick = {},
                                                         modifier = modifier
-                                                            .padding(horizontal = 3.dp)
-                                                            .size(6.dp)
-                                                    )
-                                                } else {
-                                                    Image(
-                                                        painter = painterResource(SharedRes.images.ic_pager_indicator_off),
-                                                        contentDescription = org.jetbrains.compose.resources.stringResource(
-                                                            Res.string.home_main),
-                                                        colorFilter = ColorFilter.tint(if (isDarkTheme()) skeletonLight else skeletonDark),
-                                                        modifier = modifier
-                                                            .padding(horizontal = 3.dp)
-                                                            .size(6.dp)
-                                                    )
+                                                            .weight(1f)
+                                                    ) {
+                                                        if (state.selectedTopAiringAnime == i && state.topAiringAnimeResults.isNotEmpty()) {
+                                                            Image(
+                                                                painter = painterResource(SharedRes.images.ic_pager_indicator_on),
+                                                                contentDescription = org.jetbrains.compose.resources.stringResource(
+                                                                    Res.string.home_main),
+                                                                colorFilter = ColorFilter.tint(if (isDarkTheme()) skeletonLight else skeletonDark),
+                                                                modifier = modifier
+                                                                    .padding(horizontal = 3.dp)
+                                                                    .size(6.dp)
+                                                            )
+                                                        } else {
+                                                            Image(
+                                                                painter = painterResource(SharedRes.images.ic_pager_indicator_off),
+                                                                contentDescription = org.jetbrains.compose.resources.stringResource(
+                                                                    Res.string.home_main),
+                                                                colorFilter = ColorFilter.tint(if (isDarkTheme()) skeletonLight else skeletonDark),
+                                                                modifier = modifier
+                                                                    .padding(horizontal = 3.dp)
+                                                                    .size(6.dp)
+                                                            )
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                }
-                            }
 
-                            Spacer(modifier = modifier.padding(top = 32.dp))
+                                    Spacer(modifier = modifier.padding(top = 32.dp))
 
-                            HeadingTitle(
-                                text = stringResource(
-                                    SharedRes.strings.home_heading_current_season,
-                                    if (
-                                        state.seasonAnime.isNullOrEmpty()
-                                    ) stringResource(SharedRes.strings.this_season) else state.seasonAnime.formatSeason()
-                                )
-                            )
+                                    HeadingTitle(
+                                        text = stringResource(
+                                            SharedRes.strings.home_heading_current_season,
+                                            if (
+                                                state.seasonAnime.isNullOrEmpty()
+                                            ) stringResource(SharedRes.strings.this_season) else state.seasonAnime.formatSeason()
+                                        )
+                                    )
 
-                            Spacer(modifier = modifier.padding(top = 16.dp))
+                                    Spacer(modifier = modifier.padding(top = 16.dp))
 
-                            Box {
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = (!state.seasonAnimeIsLoading && !state.seasonAnimeIsError),
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
-                                ) {
-                                    LazyRow(
-                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                        contentPadding = PaddingValues(horizontal = 16.dp),
-                                        modifier = modifier
-                                            .fillMaxWidth()
-                                    ) {
-                                        items(7) { index ->
-                                            if (index == 6) {
-                                                MoreAnimePortraitVariant(
-                                                    arrayListOf(
-                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 4].images,
-                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 3].images,
-                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 2].images,
-                                                        state.seasonAnimeResults[state.seasonAnimeResults.size - 1].images
-                                                    )
-                                                )
-                                            } else {
-                                                AnimePortraitVariant(
-                                                    state.seasonAnimeResults[index]
-                                                )
+                                    Box {
+                                        androidx.compose.animation.AnimatedVisibility(
+                                            visible = (!state.seasonAnimeIsLoading && !state.seasonAnimeIsError),
+                                            enter = fadeIn(),
+                                            exit = fadeOut()
+                                        ) {
+                                            LazyRow(
+                                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                                modifier = modifier
+                                                    .fillMaxWidth()
+                                            ) {
+                                                items(7) { index ->
+                                                    if (index == 6) {
+                                                        MoreAnimePortraitVariant(
+                                                            arrayListOf(
+                                                                state.seasonAnimeResults[state.seasonAnimeResults.size - 4].images,
+                                                                state.seasonAnimeResults[state.seasonAnimeResults.size - 3].images,
+                                                                state.seasonAnimeResults[state.seasonAnimeResults.size - 2].images,
+                                                                state.seasonAnimeResults[state.seasonAnimeResults.size - 1].images
+                                                            )
+                                                        )
+                                                    } else {
+                                                        AnimePortraitVariant(
+                                                            state.seasonAnimeResults[index]
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        androidx.compose.animation.AnimatedVisibility(
+                                            visible = (state.seasonAnimeIsLoading && !state.seasonAnimeIsError),
+                                            enter = fadeIn(),
+                                            exit = fadeOut()
+                                        ) {
+                                            LazyRow(
+                                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                                modifier = modifier
+                                                    .fillMaxWidth()
+                                            ) {
+                                                items(6) {
+                                                    AnimePortraitVariantSkeleton()
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = (state.seasonAnimeIsLoading && !state.seasonAnimeIsError),
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
-                                ) {
-                                    LazyRow(
-                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                        contentPadding = PaddingValues(horizontal = 16.dp),
-                                        modifier = modifier
-                                            .fillMaxWidth()
-                                    ) {
-                                        items(6) {
-                                            AnimePortraitVariantSkeleton()
+                                    Spacer(modifier = modifier.padding(top = 32.dp))
+
+                                    HeadingTitle(
+                                        text = stringResource(SharedRes.strings.home_heading_top_rating)
+                                    )
+
+                                    Spacer(modifier = modifier.padding(top = 16.dp))
+
+                                    Box {
+                                        androidx.compose.animation.AnimatedVisibility(
+                                            visible = (!state.topRatingIsLoading && !state.topRatingIsError),
+                                            enter = fadeIn(),
+                                            exit = fadeOut()
+                                        ) {
+                                            LazyRow(
+                                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                                modifier = modifier
+                                                    .fillMaxWidth()
+                                            ) {
+                                                items(7) { index ->
+                                                    if (index == 6) {
+                                                        MoreAnimePortraitVariant(
+                                                            arrayListOf(
+                                                                state.topRatingAnimeResults[state.topRatingAnimeResults.size - 4].images,
+                                                                state.topRatingAnimeResults[state.topRatingAnimeResults.size - 3].images,
+                                                                state.topRatingAnimeResults[state.topRatingAnimeResults.size - 2].images,
+                                                                state.topRatingAnimeResults[state.topRatingAnimeResults.size - 1].images
+                                                            )
+                                                        )
+                                                    } else {
+                                                        AnimePortraitVariant(
+                                                            state.topRatingAnimeResults[index]
+                                                        )
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
-                                }
-                            }
 
-                            Spacer(modifier = modifier.padding(top = 32.dp))
-
-                            HeadingTitle(
-                                text = stringResource(SharedRes.strings.home_heading_top_rating)
-                            )
-
-                            Spacer(modifier = modifier.padding(top = 16.dp))
-
-                            Box {
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = (!state.topRatingIsLoading && !state.topRatingIsError),
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
-                                ) {
-                                    LazyRow(
-                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                        contentPadding = PaddingValues(horizontal = 16.dp),
-                                        modifier = modifier
-                                            .fillMaxWidth()
-                                    ) {
-                                        items(7) { index ->
-                                            if (index == 6) {
-                                                MoreAnimePortraitVariant(
-                                                    arrayListOf(
-                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 4].images,
-                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 3].images,
-                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 2].images,
-                                                        state.topRatingAnimeResults[state.topRatingAnimeResults.size - 1].images
-                                                    )
-                                                )
-                                            } else {
-                                                AnimePortraitVariant(
-                                                    state.topRatingAnimeResults[index]
-                                                )
+                                        androidx.compose.animation.AnimatedVisibility(
+                                            visible = (state.topRatingIsLoading && !state.topRatingIsError),
+                                            enter = fadeIn(),
+                                            exit = fadeOut()
+                                        ) {
+                                            LazyRow(
+                                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                                modifier = modifier
+                                                    .fillMaxWidth()
+                                            ) {
+                                                items(6) {
+                                                    AnimePortraitVariantSkeleton()
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                androidx.compose.animation.AnimatedVisibility(
-                                    visible = (state.topRatingIsLoading && !state.topRatingIsError),
-                                    enter = fadeIn(),
-                                    exit = fadeOut()
-                                ) {
-                                    LazyRow(
-                                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                        contentPadding = PaddingValues(horizontal = 16.dp),
-                                        modifier = modifier
-                                            .fillMaxWidth()
-                                    ) {
-                                        items(6) {
-                                            AnimePortraitVariantSkeleton()
-                                        }
-                                    }
+                                    Spacer(modifier = modifier.padding(top = 32.dp))
+
+                                    HeadingTitle(
+                                        text = stringResource(SharedRes.strings.home_heading_upcoming)
+                                    )
                                 }
+                            },
+                            data = state.upcomingAnimeResults.collectAsLazyPagingItems(),
+                            grid = 2,
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            gridPadding = PaddingValues(bottom = 96.dp, start = 16.dp, end = 16.dp),
+                            modifier = modifier
+                        ) { anime ->
+                            if (anime != null) {
+                                AnimePortraitVariant(anime = anime, aired = false)
                             }
-
-                            Spacer(modifier = modifier.padding(top = 32.dp))
-
-                            HeadingTitle(
-                                text = stringResource(SharedRes.strings.home_heading_upcoming)
-                            )
-
-                            Spacer(modifier = modifier.padding(top = 16.dp))
                         }
                     }
                 }

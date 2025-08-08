@@ -51,6 +51,7 @@ import dev.icerock.moko.resources.compose.stringResource
 @Composable
 fun AnimePortraitVariant(
     anime: Anime,
+    aired: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     OutlinedCard(
@@ -107,17 +108,19 @@ fun AnimePortraitVariant(
                             .padding(16.dp)
                             .wrapContentSize()
                     ) {
-                        Text(
-                            text = if (anime.rank != null) "# ${formatNumber(anime.rank)}" else "Unranked",
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            fontSize = 14.sp,
-                            lineHeight = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = modifier
-                                .alpha(0.8F)
-                                .padding(horizontal = 12.dp, vertical = 6.dp)
-                        )
+                        if (aired) {
+                            Text(
+                                text = if (anime.rank != null) "# ${formatNumber(anime.rank)}" else "Unranked",
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                fontSize = 14.sp,
+                                lineHeight = 14.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = modifier
+                                    .alpha(0.8F)
+                                    .padding(horizontal = 12.dp, vertical = 6.dp)
+                            )
+                        }
                     }
                 }
 
@@ -149,16 +152,18 @@ fun AnimePortraitVariant(
                             modifier = modifier
                                 .padding(horizontal = 8.dp)
                         ) {
-                            val episodes = if (!anime.type.isNullOrEmpty() && anime.type in listOf("TV", "ONA", "OVA", "tv", "ona", "ova")) {
-                                "${anime.type.uppercase()} " + if (anime.episodeCount != null) "(${anime.episodeCount} Eps)" else "(? Eps)"
+                            val type = if (!anime.type.isNullOrEmpty() && anime.type in listOf("TV", "ONA", "OVA", "tv", "ona", "ova")) {
+                                anime.type.uppercase()
                             } else if (anime.type.isNullOrEmpty()) {
-                                "?"
+                                "Unknown"
                             } else {
                                 anime.type.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
                             }
 
+                            val episodes = if (anime.episodeCount != null) " (${anime.episodeCount} Eps)" else " (? Eps)"
+
                             Text(
-                                text = episodes,
+                                text = if (aired) type + episodes else type,
                                 fontSize = 10.sp,
                                 lineHeight = 10.sp,
                                 fontWeight = FontWeight.SemiBold,
@@ -166,35 +171,46 @@ fun AnimePortraitVariant(
                                     .alpha(0.7F)
                             )
 
-                            Spacer(modifier = modifier.width(8.dp))
+                            if (aired) Spacer(modifier = modifier.width(8.dp))
 
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Image(
-                                    org.jetbrains.compose.resources.painterResource(Res.drawable.ic_star_24),
-                                    colorFilter = ColorFilter.tint(
-                                        if (isDarkTheme()) starDark else starLight
-                                    ),
-                                    contentDescription = "",
-                                    modifier = modifier
-                                        .size(14.dp)
-                                )
-
+                            if (aired) {
                                 Row(
-                                    verticalAlignment = Alignment.Bottom,
-                                    modifier = modifier
-                                        .padding(start = 4.dp)
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Text(
-                                        text = if (anime.rating == null) "n/A" else anime.rating.toString(),
-                                        fontSize = 10.sp,
-                                        lineHeight = 10.sp,
-                                        fontWeight = FontWeight.SemiBold,
+                                    Image(
+                                        org.jetbrains.compose.resources.painterResource(Res.drawable.ic_star_24),
+                                        colorFilter = ColorFilter.tint(
+                                            if (isDarkTheme()) starDark else starLight
+                                        ),
+                                        contentDescription = "",
                                         modifier = modifier
-                                            .alpha(0.7F)
+                                            .size(14.dp)
                                     )
+
+                                    Row(
+                                        verticalAlignment = Alignment.Bottom,
+                                        modifier = modifier
+                                            .padding(start = 4.dp)
+                                    ) {
+                                        Text(
+                                            text = if (anime.rating == null) "n/A" else anime.rating.toString(),
+                                            fontSize = 10.sp,
+                                            lineHeight = 10.sp,
+                                            fontWeight = FontWeight.SemiBold,
+                                            modifier = modifier
+                                                .alpha(0.7F)
+                                        )
+                                    }
                                 }
+                            } else {
+                                Text(
+                                    text = " • " + (anime.airingSeason ?: "TBA"),
+                                    fontSize = 10.sp,
+                                    lineHeight = 10.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    modifier = modifier
+                                        .alpha(0.7F)
+                                )
                             }
                         }
                     }
@@ -445,7 +461,7 @@ fun MoreAnimePortraitVariant(
                 verticalArrangement = Arrangement.Center,
                 modifier = modifier
                     .background(
-                        color = Color.Black.copy(alpha = 0.8F)
+                        color = Color.Black.copy(alpha = 0.5F)
                     )
                     .fillMaxSize()
             ){
@@ -456,6 +472,7 @@ fun MoreAnimePortraitVariant(
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.SemiBold,
+                    color = Color.White,
                     modifier = modifier
                         .padding(horizontal = 16.dp)
                 )
@@ -463,7 +480,7 @@ fun MoreAnimePortraitVariant(
                 Image(
                     painterResource(SharedRes.images.ic_more_big_24),
                     contentDescription = "",
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
+                    colorFilter = ColorFilter.tint(Color.White),
                     modifier = modifier
                         .padding(top = 12.dp)
                         .size(32.dp)

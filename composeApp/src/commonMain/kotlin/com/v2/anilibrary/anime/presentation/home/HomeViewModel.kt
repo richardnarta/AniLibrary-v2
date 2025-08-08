@@ -2,6 +2,7 @@ package com.v2.anilibrary.anime.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import app.cash.paging.Pager
 import com.v2.anilibrary.anime.domain.Anime
 import com.v2.anilibrary.anime.domain.AnimeFilter
@@ -9,6 +10,7 @@ import com.v2.anilibrary.anime.domain.AnimeRepository
 import com.v2.anilibrary.anime.domain.AnimeType
 import com.v2.anilibrary.core.domain.onError
 import com.v2.anilibrary.core.domain.onSuccess
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -25,8 +27,12 @@ class HomeViewModel (
     val state = _state
         .onStart {
             getTopAiringAnime()
+            delay(350L)
             getCurrentSeasonAnime()
+            delay(350L)
             getTopRatingAnime()
+            delay(1000L)
+            getUpcomingAnime()
         }
         .stateIn(
             viewModelScope,
@@ -126,9 +132,9 @@ class HomeViewModel (
             }
     }
 
-    fun getUpcomingAnime() = viewModelScope.launch {
+    private fun getUpcomingAnime() = viewModelScope.launch {
         _state.update { it.copy(
-            upcomingAnimeResults = upcomingAnimePager.flow
+            upcomingAnimeResults = upcomingAnimePager.flow.cachedIn(viewModelScope)
         ) }
     }
 }

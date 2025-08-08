@@ -1,4 +1,4 @@
-package com.v2.anilibrary.anime.data.dto
+package com.v2.anilibrary.core.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

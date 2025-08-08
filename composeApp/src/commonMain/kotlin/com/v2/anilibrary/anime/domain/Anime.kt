@@ -16,7 +16,7 @@ data class Anime(
     val rating: Double?,
     val ratingUserCount: Int?,
     val rank: Int?,
-    val synopsis: String,
+    val synopsis: String?,
     val airingSeason: String?,
     val broadcastTime: String?,
     val studios: List<String>?,
