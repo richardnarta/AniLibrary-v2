@@ -37,8 +37,13 @@ data class AnimeRelation(
 )
 
 data class AnimeTheme(
-    val openings: List<String>?,
-    val endings: List<String>?,
+    val openings: List<AnimeThemeSong>?,
+    val endings: List<AnimeThemeSong>?,
+)
+
+data class AnimeThemeSong(
+    val song: String,
+    val singer: String,
 )
 
 data class AnimeItemInfo(

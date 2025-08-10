@@ -7,6 +7,7 @@ import androidx.compose.ui.res.stringResource
 import com.v2.anilibrary.anime.domain.AnimeItemInfo
 import com.v2.anilibrary.anime.domain.AnimeRelation
 import com.v2.anilibrary.anime.domain.AnimeTheme
+import com.v2.anilibrary.anime.domain.AnimeThemeSong
 
 object DummyAnime {
     @Composable
@@ -80,11 +81,20 @@ object DummyAnime {
         ),
         songTheme = AnimeTheme(
             openings = listOf(
-                stringResource(R.string.dummy_anime_opening),
+                AnimeThemeSong(
+                    song = stringResource(R.string.dummy_anime_opening_song),
+                    singer = stringResource(R.string.dummy_anime_singer)
+                ),
             ),
             endings = listOf(
-                stringResource(R.string.dummy_anime_ending_1),
-                stringResource(R.string.dummy_anime_ending_2),
+                AnimeThemeSong(
+                    song = stringResource(R.string.dummy_anime_ending_1_song),
+                    singer = stringResource(R.string.dummy_anime_singer)
+                ),
+                AnimeThemeSong(
+                    song = stringResource(R.string.dummy_anime_ending_2_song),
+                    singer = stringResource(R.string.dummy_anime_singer)
+                )
             )
         ),
         officialSite = stringResource(R.string.dummy_anime_official_site),

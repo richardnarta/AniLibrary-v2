@@ -26,9 +26,10 @@
     <string name="dummy_anime_prequel" translatable="false">5-toubun no Hanayome</string>
     <string name="dummy_anime_sequel" translatable="false">5-toubun no Hanayome Movie</string>
     <string name="dummy_anime_adaptation" translatable="false">5-toubun no Hanayome</string>
-    <string name="dummy_anime_opening" translatable="false">"Gotoubun no Katachi (五等分のカタチ)" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
-    <string name="dummy_anime_ending_1" translatable="false">"Hatsukoi (はつこい)\" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
-    <string name="dummy_anime_ending_2" translatable="false">"Go-toubun no Kimochi (五等分の気持ち)\" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase) (eps 12)</string>
+    <string name="dummy_anime_opening_song" translatable="false">Gotoubun no Kiseki (五等分の軌跡)</string>
+    <string name="dummy_anime_singer" translatable="false">Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
+    <string name="dummy_anime_ending_1_song" translatable="false">Hatsukoi (はつこい)</string>
+    <string name="dummy_anime_ending_2_song" translatable="false">Go-toubun no Kimochi (五等分の気持ち) (eps 12)</string>
     <string name="dummy_anime_official_site" translatable="false">http://www.tbs.co.jp/anime/5hanayome/2nd/</string>
     <string name="dummy_anime_x" translatable="false">\@5Hanayome_anime</string>
     <string name="dummy_anime_x_url" translatable="false">https://twitter.com/5Hanayome_anime</string>
