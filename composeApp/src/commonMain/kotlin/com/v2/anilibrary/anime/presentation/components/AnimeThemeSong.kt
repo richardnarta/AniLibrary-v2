@@ -8,12 +8,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.v2.anilibrary.SharedRes
 import com.v2.anilibrary.anime.domain.AnimeThemeSong
 import com.v2.anilibrary.core.presentation.components.RectangleFilterItem
+import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun AnimeThemeSong(
@@ -21,6 +23,10 @@ fun AnimeThemeSong(
     song: AnimeThemeSong,
     modifier: Modifier = Modifier
 ) {
+    val uriHandler = LocalUriHandler.current
+    val youtube = "https://www.youtube.com/results?search_query=${song.song}"
+    val spotify = "https://open.spotify.com/search/${song.song}"
+
     Column (
         modifier = modifier
             .fillMaxWidth()
@@ -38,7 +44,7 @@ fun AnimeThemeSong(
                 text = song.song,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 12.sp,
+                fontSize = 11.sp,
                 lineHeight = 18.sp,
                 modifier = Modifier.padding(start = 8.dp)
             )
@@ -48,25 +54,37 @@ fun AnimeThemeSong(
             text = song.singer,
             color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Normal,
-            fontSize = 10.sp,
-            lineHeight = 14.sp,
+            fontSize = 12.sp,
+            lineHeight = 15.sp,
             modifier = Modifier.padding(top = 4.dp)
         )
 
         Row (
             modifier = Modifier
-                .padding(top = 8.dp)
+                .padding(top = 12.dp)
         ) {
             RectangleFilterItem(
                 text = "Spotify",
-                icon = SharedRes.images.spotify,
+                textSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                icon = painterResource(SharedRes.images.spotify),
                 outlined = true,
+                modifier = Modifier
+                    .padding(end = 12.dp),
+                onClick = {
+                    uriHandler.openUri(spotify)
+                }
             )
 
             RectangleFilterItem(
                 text = "Youtube",
-                icon = SharedRes.images.youtube,
+                textSize = 12.sp,
+                fontWeight = FontWeight.Medium,
+                icon = painterResource(SharedRes.images.youtube),
                 outlined = true,
+                onClick = {
+                    uriHandler.openUri(youtube)
+                }
             )
         }
     }

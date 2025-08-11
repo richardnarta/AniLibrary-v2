@@ -20,14 +20,13 @@ data class Anime(
     val airingSeason: String?,
     val broadcastTime: String?,
     val studios: List<String>?,
+    val producers: List<String>?,
     val genres: List<String>?,
     val themes: List<String>?,
     val demographics: List<String>?,
     val animeRelations: List<AnimeRelation>?,
     val songTheme: AnimeTheme?,
-    val officialSite: String?,
-    val xUsername: String?,
-    val xUrl: String?,
+    val externalLinks: List<AnimeItemInfo>?,
     val streamingPlatform: List<AnimeItemInfo>?,
 )
 
@@ -51,4 +50,9 @@ data class AnimeItemInfo(
     val type: String,
     val name: String,
     val url: String,
+)
+
+data class AnimeFilterType(
+    val type: String,
+    val text: String
 )

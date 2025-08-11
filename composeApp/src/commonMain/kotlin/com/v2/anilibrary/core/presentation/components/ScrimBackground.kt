@@ -43,7 +43,7 @@ fun ScrimBackground(
                     contentDescription = "Anime Background",
                     alpha = 0.4F,
                     contentScale = ContentScale.Crop,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxSize()
                         .blur(4.dp)
                 )
@@ -55,7 +55,7 @@ fun ScrimBackground(
                     contentDescription = "Anime Background",
                     alpha = 0.4F,
                     contentScale = ContentScale.Crop,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxSize()
                 )
             }

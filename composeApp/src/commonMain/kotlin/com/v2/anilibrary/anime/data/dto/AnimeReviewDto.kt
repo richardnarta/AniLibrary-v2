@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AnimeReviewDTO(
+data class AnimeReviewDto(
     @SerialName("mal_id") val id: Int,
     @SerialName("date") val date: String,
     @SerialName("review") val review: String,

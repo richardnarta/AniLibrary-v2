@@ -59,7 +59,7 @@ fun AnimeReviewItem(
             .fillMaxWidth()
     ) {
         Row (
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -183,10 +183,10 @@ fun AnimeReviewItem(
                 text = review.review,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.8F),
                 fontWeight = FontWeight.Normal,
-                fontSize = 11.sp,
-                lineHeight = 14.sp,
+                fontSize = 12.sp,
+                lineHeight = 15.sp,
                 maxLines = if (isExpanded) Int.MAX_VALUE else 5,
-                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Justify,
                 onTextLayout = { textLayoutResult ->
                     isOverflowing = textLayoutResult.hasVisualOverflow
                 },
@@ -213,8 +213,8 @@ fun AnimeReviewItem(
                         text = "This review contains spoilers.\nClick to reveal.",
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center,
-                        fontSize = 11.sp,
-                        lineHeight = 14.sp,
+                        fontSize = 12.sp,
+                        lineHeight = 15.sp,
                         modifier = Modifier.padding(top = 4.dp)
                     )
                 }
@@ -225,8 +225,8 @@ fun AnimeReviewItem(
             text = if (isExpanded) "Read Less" else "Read More",
             color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Medium,
-            fontSize = 11.sp,
-            lineHeight = 11.sp,
+            fontSize = 12.sp,
+            lineHeight = 12.sp,
             modifier = Modifier
                 .padding(top = 12.dp)
                 .align(Alignment.CenterHorizontally)

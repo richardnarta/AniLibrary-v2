@@ -1,6 +1,6 @@
 package com.v2.anilibrary.anime.data.network
 
-import com.v2.anilibrary.anime.data.dto.SeasonAnimeResponseDTO
+import com.v2.anilibrary.anime.data.dto.SeasonAnimeResponseDto
 import com.v2.anilibrary.anime.data.dto.TopAnimeResponseDto
 import com.v2.anilibrary.anime.domain.AnimeFilter
 import com.v2.anilibrary.anime.domain.AnimeType
@@ -19,5 +19,5 @@ interface RemoteAnimeDataSource {
         type: AnimeType,
         page: Int,
         limit: Int
-    ): Result<SeasonAnimeResponseDTO, DataError.Remote>
+    ): Result<SeasonAnimeResponseDto, DataError.Remote>
 }

@@ -38,7 +38,7 @@ fun AnimeWithBadge(
             .aspectRatio(0.67F)
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
         ) {
             val backgroundImage = ImageLoader(imageUrl = imageUrl)
@@ -49,7 +49,7 @@ fun AnimeWithBadge(
                         painter = painterResource(SharedRes.images.placeholder_portrait),
                         contentDescription = "Anime Cover",
                         contentScale = ContentScale.Crop,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                     )
                 }
@@ -59,7 +59,7 @@ fun AnimeWithBadge(
                             SharedRes.images.placeholder_error_portrait),
                         contentDescription = "Anime Cover",
                         contentScale = ContentScale.Crop,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                     )
                 }
@@ -70,13 +70,13 @@ fun AnimeWithBadge(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.primary.copy(0.8F)
                 ),
-                modifier = modifier
+                modifier = Modifier
                     .align(Alignment.TopStart)
             ) {
                 Text(
                     text = topBadge,
                     color = MaterialTheme.colorScheme.background,
-                    fontWeight = FontWeight.Medium,
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = 13.sp,
                     lineHeight = 13.sp,
                     modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)
@@ -88,13 +88,13 @@ fun AnimeWithBadge(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.primary.copy(0.8F)
                 ),
-                modifier = modifier
+                modifier = Modifier
                     .align(Alignment.BottomEnd)
             ) {
                 Text(
                     text = bottomBadge,
                     color = MaterialTheme.colorScheme.background,
-                    fontWeight = FontWeight.Medium,
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = 13.sp,
                     lineHeight = 13.sp,
                     modifier = Modifier.padding(vertical = 6.dp, horizontal = 18.dp)

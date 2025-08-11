@@ -1,6 +1,6 @@
 package com.v2.anilibrary.anime.data.network
 
-import com.v2.anilibrary.anime.data.dto.SeasonAnimeResponseDTO
+import com.v2.anilibrary.anime.data.dto.SeasonAnimeResponseDto
 import com.v2.anilibrary.anime.data.dto.TopAnimeResponseDto
 import com.v2.anilibrary.anime.domain.AnimeFilter
 import com.v2.anilibrary.anime.domain.AnimeType
@@ -38,7 +38,7 @@ class KtorRemoteAnimeDataSource(
         type: AnimeType,
         page: Int,
         limit: Int
-    ): Result<SeasonAnimeResponseDTO, DataError.Remote> {
+    ): Result<SeasonAnimeResponseDto, DataError.Remote> {
         return safeCall {
             httpClient.get(
                 urlString = "https://api.jikan.moe/v4/seasons/now"

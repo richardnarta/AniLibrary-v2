@@ -2,6 +2,7 @@ package com.v2.anilibrary.core.presentation.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,20 +17,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.v2.anilibrary.SharedRes
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.compose.painterResource
 
 @Composable
 fun RectangleFilterItem(
     text: String,
-    icon: ImageResource? = null,
+    textSize: TextUnit = 10.sp,
+    fontWeight: FontWeight = FontWeight.Medium,
+    icon: Painter? = null,
+    iconColorFilter: ColorFilter? = null,
     outlined: Boolean = false,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
 ) {
     Card(
         shape = RoundedCornerShape(50.dp),
@@ -43,16 +49,21 @@ fun RectangleFilterItem(
         } else {
             null
         },
-        modifier = modifier
-            .padding(end = 8.dp)
+        modifier = modifier,
     ) {
-        Row {
+        Row(
+            modifier = Modifier
+                .clickable {
+                    onClick()
+                }
+        ) {
             if (icon != null) {
                 Image(
-                    painterResource(icon),
+                    icon,
                     contentDescription = "",
-                    modifier = modifier
-                        .padding(start = 8.dp, top = 4.dp, bottom = 4.dp)
+                    colorFilter = iconColorFilter,
+                    modifier = Modifier
+                        .padding(start = 4.dp, top = 4.dp, bottom = 4.dp)
                         .size(16.dp)
                 )
             }
@@ -62,13 +73,14 @@ fun RectangleFilterItem(
                 color = if (!outlined) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.onBackground,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                fontSize = 10.sp,
-                lineHeight = 10.sp,
-                fontWeight = FontWeight.Medium,
-                modifier = modifier
+                fontSize = textSize,
+                lineHeight = textSize,
+                fontWeight = fontWeight,
+                modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .alpha(if (!outlined) 0.9F else 1F)
-                    .padding(horizontal = if (!outlined) 12.dp else 8.dp, vertical = 4.dp)
+                    .padding(start = if (icon == null) 12.dp else 8.dp, end = 12.dp)
+                    .padding(vertical = 4.dp)
             )
         }
     }

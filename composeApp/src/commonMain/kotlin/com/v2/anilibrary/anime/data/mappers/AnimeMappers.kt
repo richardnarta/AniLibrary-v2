@@ -28,6 +28,7 @@ fun AnimeDto.toAnime(): Anime {
         airingSeason = airingSeason,
         broadcastTime = broadcastTime,
         studios = studios,
+        producers = producers,
         genres = genres,
         themes = themes,
         demographics = demographics,
@@ -62,9 +63,14 @@ fun AnimeDto.toAnime(): Anime {
                 )
             }
         ),
-        officialSite = officialSite,
-        xUsername = xUsername,
-        xUrl = xUrl,
+        externalLinks = externalLinks?.map { item ->
+            AnimeItemInfo(
+                id = item.id,
+                type = item.type,
+                name = item.name,
+                url = item.url
+            )
+        },
         streamingPlatform = streamingPlatform?.map { item ->
             AnimeItemInfo(
                 id = item.id,
@@ -72,6 +78,6 @@ fun AnimeDto.toAnime(): Anime {
                 name = item.name,
                 url = item.url
             )
-        }
+        },
     )
 }
