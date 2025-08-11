@@ -24,8 +24,9 @@ class HomeViewModel (
 ): ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
-    val state = _state
-        .onStart {
+
+    init {
+        viewModelScope.launch {
             getTopAiringAnime()
             delay(350L)
             getCurrentSeasonAnime()
@@ -34,6 +35,9 @@ class HomeViewModel (
             delay(1000L)
             getUpcomingAnime()
         }
+    }
+
+    val state = _state
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000L),

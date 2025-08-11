@@ -10,6 +10,6 @@ fun TopAnimeResponseDto.toPaging(): PaginationItems<Anime> {
             dto.toAnime()
         },
         hasNextPage = this.paging.nextPage,
-        totalCount = this.paging.items.totalPages
+        totalCount = this.paging.items?.totalPages ?: 0
     )
 }

@@ -6,6 +6,7 @@ import com.v2.anilibrary.anime.data.network.KtorRemoteAnimeDataSource
 import com.v2.anilibrary.anime.data.network.RemoteAnimeDataSource
 import com.v2.anilibrary.anime.data.paging.UpcomingAnimePagingSource
 import com.v2.anilibrary.anime.data.repository.AnimeRepository
+import com.v2.anilibrary.anime.presentation.detail.DetailViewModel
 import com.v2.anilibrary.anime.presentation.home.HomeViewModel
 import com.v2.anilibrary.core.data.HttpClientFactory
 import org.koin.core.module.Module
@@ -34,5 +35,8 @@ val sharedModule = module {
             get(),
             get(named("UpcomingPager"))
         )
+    }
+    viewModel {
+        DetailViewModel(get())
     }
 }

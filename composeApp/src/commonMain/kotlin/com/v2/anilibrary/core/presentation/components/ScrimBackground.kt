@@ -41,7 +41,7 @@ fun ScrimBackground(
                 Image(
                     painter = painterResource(SharedRes.images.placeholder_portrait),
                     contentDescription = "Anime Background",
-                    alpha = 0.4F,
+                    alpha = 0.3F,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
@@ -53,10 +53,11 @@ fun ScrimBackground(
                     painter = if (backgroundImage.result.isSuccess) backgroundImage.painter else painterResource(
                         SharedRes.images.placeholder_error_portrait),
                     contentDescription = "Anime Background",
-                    alpha = 0.4F,
+                    alpha = 0.3F,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
+                        .blur(4.dp)
                 )
             }
         }

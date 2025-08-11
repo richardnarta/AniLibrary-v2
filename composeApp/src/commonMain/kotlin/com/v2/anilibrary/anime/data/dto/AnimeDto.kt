@@ -167,15 +167,15 @@ data class AnimeBroadcastInfo(
 
 @Serializable
 data class AnimeItemInfo(
-    @SerialName("mal_id") val id: Int,
-    @SerialName("type") val type: String,
+    @SerialName("mal_id") val id: Int? = null,
+    @SerialName("type") val type: String? = null,
     @SerialName("name") val name: String,
     @SerialName("url") val url: String,
 )
 
 @Serializable
 data class AnimeRelation(
-    val relationType: String,
+    @SerialName("relation") val relationType: String,
     val entry: List<AnimeItemInfo>?,
 )
 

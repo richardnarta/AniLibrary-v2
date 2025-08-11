@@ -4,11 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PaginationDTO (
+data class PaginationDto (
     @SerialName("has_next_page") val nextPage: Boolean,
     @SerialName("last_visible_page") val lastPage: Int,
-    @SerialName("current_page") val currentPage: Int,
-    @SerialName("items") val items: PaginationItem,
+    @SerialName("current_page") val currentPage: Int? = null,
+    @SerialName("items") val items: PaginationItem? = null,
 )
 
 @Serializable

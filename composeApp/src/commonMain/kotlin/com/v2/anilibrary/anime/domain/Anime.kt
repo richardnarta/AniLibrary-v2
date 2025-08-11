@@ -46,8 +46,8 @@ data class AnimeThemeSong(
 )
 
 data class AnimeItemInfo(
-    val id: Int,
-    val type: String,
+    val id: Int? = null,
+    val type: String? = null,
     val name: String,
     val url: String,
 )

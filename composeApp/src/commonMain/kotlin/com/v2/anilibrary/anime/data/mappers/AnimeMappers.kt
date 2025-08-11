@@ -65,16 +65,12 @@ fun AnimeDto.toAnime(): Anime {
         ),
         externalLinks = externalLinks?.map { item ->
             AnimeItemInfo(
-                id = item.id,
-                type = item.type,
                 name = item.name,
                 url = item.url
             )
         },
         streamingPlatform = streamingPlatform?.map { item ->
             AnimeItemInfo(
-                id = item.id,
-                type = item.type,
                 name = item.name,
                 url = item.url
             )

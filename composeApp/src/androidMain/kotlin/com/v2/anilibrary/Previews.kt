@@ -19,10 +19,10 @@ fun AnimePreview(
 ) {
     AppTheme {
         DetailScreen(
-            dummyAnime = DummyAnime.getAnime(),
-            dummyCharacter = DummyAnime.getAnimeCharacter(),
-            dummyTrailer = DummyAnime.getAnimeTrailer(),
-            dummyReview = DummyAnime.getAnimeReview(),
+//            dummyAnime = DummyAnime.getAnime(),
+//            dummyCharacter = DummyAnime.getAnimeCharacter(),
+//            dummyTrailer = DummyAnime.getAnimeTrailer(),
+//            dummyReview = DummyAnime.getAnimeReview(),
             state = DetailState(),
             onAction = { action ->
                 when (action) {

@@ -1,5 +1,10 @@
 package com.v2.anilibrary.anime.data.network
 
+import com.v2.anilibrary.anime.data.dto.AnimeCharacterResponseDto
+import com.v2.anilibrary.anime.data.dto.AnimePictureResponseDto
+import com.v2.anilibrary.anime.data.dto.AnimeResponseDto
+import com.v2.anilibrary.anime.data.dto.AnimeReviewResponseDto
+import com.v2.anilibrary.anime.data.dto.AnimeVideoResponseDto
 import com.v2.anilibrary.anime.data.dto.SeasonAnimeResponseDto
 import com.v2.anilibrary.anime.data.dto.TopAnimeResponseDto
 import com.v2.anilibrary.anime.domain.AnimeFilter
@@ -20,4 +25,26 @@ interface RemoteAnimeDataSource {
         page: Int,
         limit: Int
     ): Result<SeasonAnimeResponseDto, DataError.Remote>
+
+    suspend fun getFullAnimeDetail(
+        animeId: Int,
+    ): Result<AnimeResponseDto, DataError.Remote>
+
+    suspend fun getAnimePicture(
+        animeId: Int,
+    ): Result<AnimePictureResponseDto, DataError.Remote>
+
+    suspend fun getAnimeCharacter(
+        animeId: Int,
+    ): Result<AnimeCharacterResponseDto, DataError.Remote>
+
+    suspend fun getAnimePromotionalVideo(
+        animeId: Int,
+    ): Result<AnimeVideoResponseDto, DataError.Remote>
+
+    suspend fun getAnimeReview(
+        animeId: Int,
+        page: Int,
+        limit: Int
+    ): Result<AnimeReviewResponseDto, DataError.Remote>
 }
