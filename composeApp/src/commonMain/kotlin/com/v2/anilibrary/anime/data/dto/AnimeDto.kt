@@ -23,6 +23,7 @@ data class AnimeDto(
     @SerialName("year") val year: Int?,
     @SerialName("broadcast") val broadcast: AnimeBroadcastInfo?,
     @SerialName("studios") val animeStudios: List<AnimeItemInfo>?,
+    @SerialName("producers") val animeProducers: List<AnimeItemInfo>?,
     @SerialName("genres") val animeGenres: List<AnimeItemInfo>?,
     @SerialName("themes") val animeThemes: List<AnimeItemInfo>?,
     @SerialName("demographics") val animeDemographics: List<AnimeItemInfo>?,
@@ -61,6 +62,21 @@ data class AnimeDto(
 
                 animeStudios.map { studio ->
                     list.add(studio.name)
+                }
+
+                list.toList()
+            } else {
+                null
+            }
+        }
+
+    val producers: List<String>?
+        get() {
+            return if (animeProducers != null) {
+                val list = mutableListOf<String>()
+
+                animeProducers.map { producer ->
+                    list.add(producer.name)
                 }
 
                 list.toList()
@@ -113,15 +129,6 @@ data class AnimeDto(
                 null
             }
         }
-
-    val officialSite: String?
-        get() = externalLinks?.find { it.name == "Official Site" }?.url
-
-    val xUsername: String?
-        get() = externalLinks?.find { it.url.contains("twitter.com") }?.name
-
-    val xUrl: String?
-        get() = externalLinks?.find { it.url.contains("twitter.com") }?.url
 }
 
 @Serializable

@@ -15,9 +15,17 @@
     <string name="dummy_anime_rating_user" translatable="false">461755</string>
     <string name="dummy_anime_rank" translatable="false">636</string>
     <string name="dummy_anime_synopsis" translatable="false">Through their tutor Fuutarou Uesugi\'s diligent guidance, the Nakano quintuplets\' academic performance shows signs of improvement, even if their path to graduation is still rocky. However, as they continue to cause various situations that delay any actual tutoring, Fuutarou becomes increasingly involved with their personal lives, further complicating their relationship with each other.\n\nOn another note, Fuutarou slowly begins to realize the existence of a possible connection between him and the past he believes to have shared with one of the five girls. With everyone\'s feelings beginning to develop and overlap, will they be able to keep their bond strictly to that of a teacher and his students—or will it mature into something else entirely?\n\n[Written by MAL Rewrite]</string>
-    <string name="dummy_anime_season" translatable="false">winter 2021</string>
+    <string name="dummy_anime_season" translatable="false">Winter 2021</string>
     <string name="dummy_anime_broadcast" translatable="false">Fridays at 01:28 (JST)</string>
     <string name="dummy_anime_studio_1" translatable="false">Bibury Animation Studios</string>
+    <string name="dummy_anime_producer_1" translatable="false">Pony Canyon</string>
+    <string name="dummy_anime_producer_2" translatable="false">Kodansha</string>
+    <string name="dummy_anime_producer_3" translatable="false">Dax Production</string>
+    <string name="dummy_anime_producer_4" translatable="false">BS11</string>
+    <string name="dummy_anime_producer_5" translatable="false">Nichion</string>
+    <string name="dummy_anime_producer_6" translatable="false">Gyao!</string>
+    <string name="dummy_anime_producer_7" translatable="false">Good Smile Film</string>
+    <string name="dummy_anime_producer_8" translatable="false">MAGNET</string>
     <string name="dummy_anime_genre_1" translatable="false">Comedy</string>
     <string name="dummy_anime_genre_2" translatable="false">Romance</string>
     <string name="dummy_anime_theme_1" translatable="false">Harem</string>
@@ -26,9 +34,10 @@
     <string name="dummy_anime_prequel" translatable="false">5-toubun no Hanayome</string>
     <string name="dummy_anime_sequel" translatable="false">5-toubun no Hanayome Movie</string>
     <string name="dummy_anime_adaptation" translatable="false">5-toubun no Hanayome</string>
-    <string name="dummy_anime_opening" translatable="false">"Gotoubun no Katachi (五等分のカタチ)" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
-    <string name="dummy_anime_ending_1" translatable="false">"Hatsukoi (はつこい)\" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
-    <string name="dummy_anime_ending_2" translatable="false">"Go-toubun no Kimochi (五等分の気持ち)\" by Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase) (eps 12)</string>
+    <string name="dummy_anime_opening_song" translatable="false">Gotoubun no Kiseki (五等分の軌跡)</string>
+    <string name="dummy_anime_singer" translatable="false">Nakanoke no Itsuzugo (中野家の五つ子) (Kana Hanazawa, Ayana Taketatsu, Miku Itou, Ayane Sakura, Inori Minase)</string>
+    <string name="dummy_anime_ending_1_song" translatable="false">Hatsukoi (はつこい)</string>
+    <string name="dummy_anime_ending_2_song" translatable="false">Go-toubun no Kimochi (五等分の気持ち) (eps 12)</string>
     <string name="dummy_anime_official_site" translatable="false">http://www.tbs.co.jp/anime/5hanayome/2nd/</string>
     <string name="dummy_anime_x" translatable="false">\@5Hanayome_anime</string>
     <string name="dummy_anime_x_url" translatable="false">https://twitter.com/5Hanayome_anime</string>
