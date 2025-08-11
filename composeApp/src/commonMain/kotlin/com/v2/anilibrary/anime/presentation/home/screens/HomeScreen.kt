@@ -83,8 +83,7 @@ fun HomeScreenRoot(
 fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
-    onAnimeCardClicked: (animeId: Int) -> Unit,
-    modifier: Modifier = Modifier
+    onAnimeCardClicked: (animeId: Int) -> Unit
 ) {
     val pagerState = rememberPagerState (initialPage = 0) { 3 }
 
@@ -138,11 +137,11 @@ fun HomeScreen(
                 exit = fadeOut()
             ) {
                 Box (
-                    modifier = modifier
+                    modifier = Modifier
                         .padding(bottom = 16.dp, start = 16.dp, end = 16.dp)
                 ) {
                     Box(
-                        modifier = modifier
+                        modifier = Modifier
                             .background(
                                 color = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.93F),
                                 shape = RoundedCornerShape(30.dp),
@@ -153,7 +152,7 @@ fun HomeScreen(
 
                     Column (
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = modifier
+                        modifier = Modifier
                             .background(Color.Transparent)
                     ) {
                         TabRow(
@@ -163,7 +162,7 @@ fun HomeScreen(
                                 tabPositions.addAll(tabPositionsList)
 
                                 Box(
-                                    modifier = modifier
+                                    modifier = Modifier
                                         .fillMaxSize()
                                 ) {
                                     Canvas(
@@ -187,7 +186,7 @@ fun HomeScreen(
                             },
                             divider = {},
                             containerColor = Color.Transparent,
-                            modifier = modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(4.dp)
                         ) {
@@ -200,14 +199,14 @@ fun HomeScreen(
                                             pagerState.animateScrollToPage(0)
                                         }
                                     },
-                                    modifier = modifier
+                                    modifier = Modifier
                                         .weight(1f)
                                 ) {
                                     Image(
                                         painterResource(Res.drawable.ic_home_24),
                                         contentDescription = stringResource(Res.string.home_main),
                                         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
-                                        modifier = modifier
+                                        modifier = Modifier
                                             .padding(top = 12.dp, bottom = 12.dp)
                                             .size(28.dp)
                                     )
@@ -221,14 +220,14 @@ fun HomeScreen(
                                             pagerState.animateScrollToPage(1)
                                         }
                                     },
-                                    modifier = modifier
+                                    modifier = Modifier
                                         .weight(1f)
                                 ) {
                                     Image(
                                         painterResource(Res.drawable.ic_news_24),
                                         contentDescription = stringResource(Res.string.home_news),
                                         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
-                                        modifier = modifier
+                                        modifier = Modifier
                                             .padding(top = 12.dp, bottom = 12.dp)
                                             .size(28.dp)
 
@@ -243,14 +242,14 @@ fun HomeScreen(
                                             pagerState.animateScrollToPage(2)
                                         }
                                     },
-                                    modifier = modifier
+                                    modifier = Modifier
                                         .weight(1f)
                                 ) {
                                     Image(
                                         painterResource(Res.drawable.ic_collection_24),
                                         contentDescription = stringResource(Res.string.home_collection),
                                         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
-                                        modifier = modifier
+                                        modifier = Modifier
                                             .padding(top = 12.dp, bottom = 12.dp)
                                             .size(28.dp)
                                     )
@@ -261,16 +260,16 @@ fun HomeScreen(
                 }
             }
         },
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
     ) {
         HorizontalPager(
             state = pagerState,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
         ) { pageIndex ->
             Box(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxSize()
             ) {
                 when (pageIndex) {
