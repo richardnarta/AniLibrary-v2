@@ -62,21 +62,36 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DetailScreenRoot(
+    animeId: Int,
     viewModel: DetailViewModel = koinViewModel<DetailViewModel>()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    DetailScreen(
-        state = state,
-        onAction = { action ->
-            when (action) {
-                is DetailAction.LastScrollPosition -> Unit
-                is DetailAction.OverflowSynopsis -> Unit
-                is DetailAction.ViewMoreSynopsis -> Unit
-            }
-            viewModel.onAction(action)
-        }
-    )
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(
+            text = "$animeId",
+            color = MaterialTheme.colorScheme.onBackground,
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            lineHeight = 20.sp,
+            modifier = Modifier
+                .align(Alignment.Center)
+        )
+    }
+
+//    DetailScreen(
+//        state = state,
+//        onAction = { action ->
+//            when (action) {
+//                is DetailAction.LastScrollPosition -> Unit
+//                is DetailAction.OverflowSynopsis -> Unit
+//                is DetailAction.ViewMoreSynopsis -> Unit
+//            }
+//            viewModel.onAction(action)
+//        }
+//    )
 }
 
 @Composable

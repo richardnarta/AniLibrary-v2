@@ -52,6 +52,7 @@ import dev.icerock.moko.resources.compose.stringResource
 fun AnimePortraitVariant(
     anime: Anime,
     aired: Boolean = true,
+    onAnimeCardClicked: (animeId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     OutlinedCard(
@@ -59,10 +60,13 @@ fun AnimePortraitVariant(
         modifier = modifier
             .widthIn(max = 150.dp)
             .fillMaxWidth()
-            .aspectRatio(0.67F)
+            .aspectRatio(0.67F),
+        onClick = {
+            onAnimeCardClicked(anime.id)
+        }
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
         ) {
             val backgroundImage = ImageLoader(imageUrl = anime.images)
@@ -73,7 +77,7 @@ fun AnimePortraitVariant(
                         painter = painterResource(SharedRes.images.placeholder_portrait),
                         contentDescription = anime.title,
                         contentScale = ContentScale.Crop,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                     )
                 }
@@ -83,19 +87,19 @@ fun AnimePortraitVariant(
                             SharedRes.images.placeholder_error_portrait),
                         contentDescription = anime.title,
                         contentScale = ContentScale.Crop,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                     )
                 }
             }
 
             Column (
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxSize()
             ) {
                 Box (
                     contentAlignment = Alignment.TopEnd,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .weight(3F)
                 ) {
@@ -104,7 +108,7 @@ fun AnimePortraitVariant(
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.background.copy(alpha = 0.8F)
                         ),
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(16.dp)
                             .wrapContentSize()
                     ) {
@@ -116,7 +120,7 @@ fun AnimePortraitVariant(
                                 fontSize = 14.sp,
                                 lineHeight = 14.sp,
                                 fontWeight = FontWeight.SemiBold,
-                                modifier = modifier
+                                modifier = Modifier
                                     .alpha(0.8F)
                                     .padding(horizontal = 12.dp, vertical = 6.dp)
                             )
@@ -125,14 +129,14 @@ fun AnimePortraitVariant(
                 }
 
                 Box (
-                    modifier = modifier
+                    modifier = Modifier
                         .weight(1F)
                         .background(color = MaterialTheme.colorScheme.background.copy(alpha = 0.9F))
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceEvenly,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                     ) {
                         Text(
@@ -143,13 +147,13 @@ fun AnimePortraitVariant(
                             lineHeight = 15.sp,
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center,
-                            modifier = modifier
+                            modifier = Modifier
                                 .padding(horizontal = 8.dp)
                         )
 
                         Row (
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = modifier
+                            modifier = Modifier
                                 .padding(horizontal = 8.dp)
                         ) {
                             val type = if (!anime.type.isNullOrEmpty() && anime.type in listOf("TV", "ONA", "OVA", "tv", "ona", "ova")) {
@@ -167,11 +171,11 @@ fun AnimePortraitVariant(
                                 fontSize = 10.sp,
                                 lineHeight = 10.sp,
                                 fontWeight = FontWeight.SemiBold,
-                                modifier = modifier
+                                modifier = Modifier
                                     .alpha(0.7F)
                             )
 
-                            if (aired) Spacer(modifier = modifier.width(8.dp))
+                            if (aired) Spacer(modifier = Modifier.width(8.dp))
 
                             if (aired) {
                                 Row(
@@ -183,7 +187,7 @@ fun AnimePortraitVariant(
                                             if (isDarkTheme()) starDark else starLight
                                         ),
                                         contentDescription = "",
-                                        modifier = modifier
+                                        modifier = Modifier
                                             .size(14.dp)
                                     )
 
@@ -197,7 +201,7 @@ fun AnimePortraitVariant(
                                             fontSize = 10.sp,
                                             lineHeight = 10.sp,
                                             fontWeight = FontWeight.SemiBold,
-                                            modifier = modifier
+                                            modifier = Modifier
                                                 .alpha(0.7F)
                                         )
                                     }
@@ -208,7 +212,7 @@ fun AnimePortraitVariant(
                                     fontSize = 10.sp,
                                     lineHeight = 10.sp,
                                     fontWeight = FontWeight.SemiBold,
-                                    modifier = modifier
+                                    modifier = Modifier
                                         .alpha(0.7F)
                                 )
                             }
@@ -232,24 +236,24 @@ fun AnimePortraitVariantSkeleton(
             .aspectRatio(0.67F)
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
         ) {
             Image(
                 painter = painterResource(SharedRes.images.placeholder_portrait),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxSize()
             )
 
             Column (
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxSize()
             ) {
                 Box (
                     contentAlignment = Alignment.TopEnd,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .weight(3F)
                 ) {
@@ -258,7 +262,7 @@ fun AnimePortraitVariantSkeleton(
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.background.copy(alpha = 0.9F)
                         ),
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(16.dp)
                             .wrapContentSize()
                     ) {
@@ -270,7 +274,7 @@ fun AnimePortraitVariantSkeleton(
                             lineHeight = 14.sp,
                             color = Color.Transparent,
                             fontWeight = FontWeight.SemiBold,
-                            modifier = modifier
+                            modifier = Modifier
                                 .alpha(0.8F)
                                 .padding(horizontal = 12.dp, vertical = 6.dp)
                         )
@@ -278,14 +282,14 @@ fun AnimePortraitVariantSkeleton(
                 }
 
                 Box (
-                    modifier = modifier
+                    modifier = Modifier
                         .weight(1F)
                         .background(color = MaterialTheme.colorScheme.background.copy(alpha = 0.9F))
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceEvenly,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                             .padding(horizontal = 8.dp)
                     ) {
@@ -295,7 +299,7 @@ fun AnimePortraitVariantSkeleton(
                             fontSize = 15.sp,
                             lineHeight = 15.sp,
                             fontWeight = FontWeight.Bold,
-                            modifier = modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .background(
                                     color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -308,7 +312,7 @@ fun AnimePortraitVariantSkeleton(
                             fontSize = 10.sp,
                             lineHeight = 10.sp,
                             fontWeight = FontWeight.SemiBold,
-                            modifier = modifier
+                            modifier = Modifier
                                 .width(100.dp)
                                 .background(
                                     color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -336,15 +340,15 @@ fun MoreAnimePortraitVariant(
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
         ) {
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxSize()
             ) {
                 Row(
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .weight(1F)
                 ) {
@@ -356,7 +360,7 @@ fun MoreAnimePortraitVariant(
                                 painter = painterResource(SharedRes.images.placeholder_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                             )
                         }
@@ -366,7 +370,7 @@ fun MoreAnimePortraitVariant(
                                     SharedRes.images.placeholder_error_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                                     .blur(1.dp)
                             )
@@ -381,7 +385,7 @@ fun MoreAnimePortraitVariant(
                                 painter = painterResource(SharedRes.images.placeholder_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                             )
                         }
@@ -391,7 +395,7 @@ fun MoreAnimePortraitVariant(
                                     SharedRes.images.placeholder_error_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                                     .blur(1.dp)
                             )
@@ -400,7 +404,7 @@ fun MoreAnimePortraitVariant(
                 }
 
                 Row(
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .weight(1F)
                 ) {
@@ -412,7 +416,7 @@ fun MoreAnimePortraitVariant(
                                 painter = painterResource(SharedRes.images.placeholder_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                             )
                         }
@@ -422,7 +426,7 @@ fun MoreAnimePortraitVariant(
                                     SharedRes.images.placeholder_error_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                                     .blur(1.dp)
                             )
@@ -437,7 +441,7 @@ fun MoreAnimePortraitVariant(
                                 painter = painterResource(SharedRes.images.placeholder_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                             )
                         }
@@ -447,7 +451,7 @@ fun MoreAnimePortraitVariant(
                                     SharedRes.images.placeholder_error_portrait),
                                 contentDescription = "",
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .weight(1F)
                                     .blur(1.dp)
                             )
@@ -459,7 +463,7 @@ fun MoreAnimePortraitVariant(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = modifier
+                modifier = Modifier
                     .background(
                         color = Color.Black.copy(alpha = 0.5F)
                     )
@@ -473,7 +477,7 @@ fun MoreAnimePortraitVariant(
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White,
-                    modifier = modifier
+                    modifier = Modifier
                         .padding(horizontal = 16.dp)
                 )
 
@@ -481,7 +485,7 @@ fun MoreAnimePortraitVariant(
                     painterResource(SharedRes.images.ic_more_big_24),
                     contentDescription = "",
                     colorFilter = ColorFilter.tint(Color.White),
-                    modifier = modifier
+                    modifier = Modifier
                         .padding(top = 12.dp)
                         .size(32.dp)
                 )

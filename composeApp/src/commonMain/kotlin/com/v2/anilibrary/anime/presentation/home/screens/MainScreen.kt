@@ -66,7 +66,7 @@ fun HomeMainScreen(
     state: HomeState,
     drawerState: NavDrawerState,
     onAction: (HomeAction) -> Unit,
-    modifier: Modifier = Modifier
+    onAnimeCardClicked: (animeId: Int) -> Unit
 ) {
     val pagerState = rememberPagerState (initialPage = 0) { Int.MAX_VALUE / 2 }
 
@@ -114,7 +114,7 @@ fun HomeMainScreen(
                 content = {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .widthIn(max = 400.dp)
                     ) {
@@ -125,7 +125,7 @@ fun HomeMainScreen(
                             onImeSearch = {},
                             onIconClicked = drawerState::onMenuClick,
                             isEnabled = false,
-                            modifier = modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(16.dp)
                         )
@@ -134,12 +134,12 @@ fun HomeMainScreen(
                             header = {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = modifier
+                                    modifier = Modifier
                                         .fillMaxWidth()
                                 ) {
                                     HeadingTitle(
                                         text = stringResource(SharedRes.strings.home_heading_top_airing),
-                                        modifier = modifier
+                                        modifier = Modifier
                                             .padding(top = 16.dp)
                                     )
 
@@ -151,11 +151,12 @@ fun HomeMainScreen(
                                         ) {
                                             HorizontalPager(
                                                 state = pagerState,
-                                                modifier = modifier
+                                                modifier = Modifier
                                                     .padding(top = 16.dp)
                                             ) { pageIndex ->
                                                 AnimeLandscapeVariant(
-                                                    anime = state.topAiringAnimeResults[pageIndex % state.topAiringAnimeResults.size]
+                                                    anime = state.topAiringAnimeResults[pageIndex % state.topAiringAnimeResults.size],
+                                                    onAnimeCardClicked = onAnimeCardClicked
                                                 )
                                             }
                                         }
@@ -169,10 +170,10 @@ fun HomeMainScreen(
                                         }
                                     }
 
-                                    Spacer(modifier = modifier.padding(top = 16.dp))
+                                    Spacer(modifier = Modifier.padding(top = 16.dp))
 
                                     Surface(
-                                        modifier = modifier
+                                        modifier = Modifier
                                             .height(10.dp)
                                     ) {
                                         TabRow(
@@ -180,7 +181,7 @@ fun HomeMainScreen(
                                             indicator = {},
                                             divider = {},
                                             containerColor = Color.Transparent,
-                                            modifier = modifier
+                                            modifier = Modifier
                                                 .widthIn(max = 120.dp)
                                         ) {
                                             CompositionLocalProvider(LocalRippleConfiguration provides null) {
@@ -188,7 +189,7 @@ fun HomeMainScreen(
                                                     Tab(
                                                         selected = false,
                                                         onClick = {},
-                                                        modifier = modifier
+                                                        modifier = Modifier
                                                             .weight(1f)
                                                     ) {
                                                         if (state.selectedTopAiringAnime == i && state.topAiringAnimeResults.isNotEmpty()) {
@@ -197,7 +198,7 @@ fun HomeMainScreen(
                                                                 contentDescription = org.jetbrains.compose.resources.stringResource(
                                                                     Res.string.home_main),
                                                                 colorFilter = ColorFilter.tint(if (isDarkTheme()) skeletonLight else skeletonDark),
-                                                                modifier = modifier
+                                                                modifier = Modifier
                                                                     .padding(horizontal = 3.dp)
                                                                     .size(6.dp)
                                                             )
@@ -207,7 +208,7 @@ fun HomeMainScreen(
                                                                 contentDescription = org.jetbrains.compose.resources.stringResource(
                                                                     Res.string.home_main),
                                                                 colorFilter = ColorFilter.tint(if (isDarkTheme()) skeletonLight else skeletonDark),
-                                                                modifier = modifier
+                                                                modifier = Modifier
                                                                     .padding(horizontal = 3.dp)
                                                                     .size(6.dp)
                                                             )
@@ -218,7 +219,7 @@ fun HomeMainScreen(
                                         }
                                     }
 
-                                    Spacer(modifier = modifier.padding(top = 32.dp))
+                                    Spacer(modifier = Modifier.padding(top = 32.dp))
 
                                     HeadingTitle(
                                         text = stringResource(
@@ -229,7 +230,7 @@ fun HomeMainScreen(
                                         )
                                     )
 
-                                    Spacer(modifier = modifier.padding(top = 16.dp))
+                                    Spacer(modifier = Modifier.padding(top = 16.dp))
 
                                     Box {
                                         androidx.compose.animation.AnimatedVisibility(
@@ -239,7 +240,7 @@ fun HomeMainScreen(
                                         ) {
                                             LazyRow(
                                                 horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                                modifier = modifier
+                                                modifier = Modifier
                                                     .fillMaxWidth()
                                             ) {
                                                 items(7) { index ->
@@ -254,7 +255,8 @@ fun HomeMainScreen(
                                                         )
                                                     } else {
                                                         AnimePortraitVariant(
-                                                            state.seasonAnimeResults[index]
+                                                            state.seasonAnimeResults[index],
+                                                            onAnimeCardClicked = onAnimeCardClicked
                                                         )
                                                     }
                                                 }
@@ -268,7 +270,7 @@ fun HomeMainScreen(
                                         ) {
                                             LazyRow(
                                                 horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                                modifier = modifier
+                                                modifier = Modifier
                                                     .fillMaxWidth()
                                             ) {
                                                 items(6) {
@@ -278,13 +280,13 @@ fun HomeMainScreen(
                                         }
                                     }
 
-                                    Spacer(modifier = modifier.padding(top = 32.dp))
+                                    Spacer(modifier = Modifier.padding(top = 32.dp))
 
                                     HeadingTitle(
                                         text = stringResource(SharedRes.strings.home_heading_top_rating)
                                     )
 
-                                    Spacer(modifier = modifier.padding(top = 16.dp))
+                                    Spacer(modifier = Modifier.padding(top = 16.dp))
 
                                     Box {
                                         androidx.compose.animation.AnimatedVisibility(
@@ -294,7 +296,7 @@ fun HomeMainScreen(
                                         ) {
                                             LazyRow(
                                                 horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                                modifier = modifier
+                                                modifier = Modifier
                                                     .fillMaxWidth()
                                             ) {
                                                 items(7) { index ->
@@ -309,7 +311,8 @@ fun HomeMainScreen(
                                                         )
                                                     } else {
                                                         AnimePortraitVariant(
-                                                            state.topRatingAnimeResults[index]
+                                                            state.topRatingAnimeResults[index],
+                                                            onAnimeCardClicked = onAnimeCardClicked
                                                         )
                                                     }
                                                 }
@@ -323,7 +326,7 @@ fun HomeMainScreen(
                                         ) {
                                             LazyRow(
                                                 horizontalArrangement = Arrangement.spacedBy(12.dp),
-                                                modifier = modifier
+                                                modifier = Modifier
                                                     .fillMaxWidth()
                                             ) {
                                                 items(6) {
@@ -333,7 +336,7 @@ fun HomeMainScreen(
                                         }
                                     }
 
-                                    Spacer(modifier = modifier.padding(top = 32.dp))
+                                    Spacer(modifier = Modifier.padding(top = 32.dp))
 
                                     HeadingTitle(
                                         text = stringResource(SharedRes.strings.home_heading_upcoming)
@@ -345,10 +348,10 @@ fun HomeMainScreen(
                             verticalArrangement = Arrangement.spacedBy(16.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
                             gridPadding = PaddingValues(bottom = 96.dp, start = 16.dp, end = 16.dp),
-                            modifier = modifier
+                            modifier = Modifier
                         ) { anime ->
                             if (anime != null) {
-                                AnimePortraitVariant(anime = anime, aired = false)
+                                AnimePortraitVariant(anime = anime, aired = false, onAnimeCardClicked = onAnimeCardClicked)
                             }
                         }
                     }

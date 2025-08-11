@@ -44,16 +44,20 @@ import dev.icerock.moko.resources.compose.painterResource
 @Composable
 fun AnimeLandscapeVariant(
     anime: Anime,
+    onAnimeCardClicked: (animeId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     OutlinedCard(
         shape = RoundedCornerShape(40.dp),
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(1.67F)
+            .aspectRatio(1.67F),
+        onClick = {
+            onAnimeCardClicked(anime.id)
+        }
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
         ) {
             val backgroundImage = ImageLoader(imageUrl = anime.images)
@@ -65,7 +69,7 @@ fun AnimeLandscapeVariant(
                         contentDescription = anime.title,
                         alpha = 0.2F,
                         contentScale = ContentScale.Crop,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                             .blur(4.dp)
                     )
@@ -76,7 +80,7 @@ fun AnimeLandscapeVariant(
                         contentDescription = anime.title,
                         alpha = 0.2F,
                         contentScale = ContentScale.Crop,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                             .blur(4.dp)
                     )
@@ -84,14 +88,14 @@ fun AnimeLandscapeVariant(
             }
 
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxSize()
                     .padding(vertical = 10.dp)
                     .padding(start = 10.dp, end = 12.dp)
             ) {
                 Card(
                     shape = RoundedCornerShape(35.dp),
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxHeight()
                         .aspectRatio(0.67F, matchHeightConstraintsFirst = true)
                 ) {
@@ -103,7 +107,7 @@ fun AnimeLandscapeVariant(
                                 painter = painterResource(SharedRes.images.placeholder_portrait),
                                 contentDescription = anime.title,
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .fillMaxSize()
                             )
                         }
@@ -112,7 +116,7 @@ fun AnimeLandscapeVariant(
                                 painter = if (coverImage.result.isSuccess) coverImage.painter else painterResource(SharedRes.images.placeholder_error_portrait),
                                 contentDescription = anime.title,
                                 contentScale = ContentScale.Crop,
-                                modifier = modifier
+                                modifier = Modifier
                                     .fillMaxSize()
                             )
                         }
@@ -120,7 +124,7 @@ fun AnimeLandscapeVariant(
                 }
 
                 Column(
-                    modifier = modifier
+                    modifier = Modifier
                         .weight(1F)
                         .padding(start = 16.dp, end = 8.dp)
                 ) {
@@ -140,26 +144,30 @@ fun AnimeLandscapeVariant(
                         fontSize = 10.sp,
                         lineHeight = 10.sp,
                         fontWeight = FontWeight.Medium,
-                        modifier = modifier
+                        modifier = Modifier
                             .alpha(0.75F)
                             .padding(top = 4.dp)
                     )
 
                     Row(
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(top = 8.dp)
                             .fillMaxWidth()
                     ) {
                         if (!anime.genres.isNullOrEmpty()) {
                             for (item in anime.genres) {
-                                RectangleFilterItem(text = item)
+                                RectangleFilterItem(
+                                    text = item,
+                                    modifier = Modifier
+                                        .padding(end = 8.dp)
+                                )
                             }
                         }
                     }
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(top = 8.dp)
                     ) {
                         Image(
@@ -168,12 +176,12 @@ fun AnimeLandscapeVariant(
                                 if (isDarkTheme()) starDark else starLight
                             ),
                             contentDescription = "",
-                            modifier = modifier
+                            modifier = Modifier
                         )
 
                         Row(
                             verticalAlignment = Alignment.Bottom,
-                            modifier = modifier
+                            modifier = Modifier
                                 .padding(start = 4.dp)
                         ) {
                             Text(
@@ -181,7 +189,7 @@ fun AnimeLandscapeVariant(
                                 fontSize = 14.sp,
                                 lineHeight = 14.sp,
                                 fontWeight = FontWeight.Bold,
-                                modifier = modifier
+                                modifier = Modifier
                                     .alpha(0.7F)
                             )
 
@@ -192,7 +200,7 @@ fun AnimeLandscapeVariant(
                                 fontSize = 9.sp,
                                 lineHeight = 12.sp,
                                 fontWeight = FontWeight.Medium,
-                                modifier = modifier
+                                modifier = Modifier
                                     .alpha(0.5F)
                                     .padding(start = 4.dp)
                             )
@@ -205,7 +213,7 @@ fun AnimeLandscapeVariant(
                         fontSize = 10.sp,
                         lineHeight = 12.sp,
                         fontWeight = FontWeight.Medium,
-                        modifier = modifier
+                        modifier = Modifier
                             .alpha(0.5F)
                             .weight(1F)
                             .padding(top = 8.dp)
@@ -228,18 +236,18 @@ fun AnimeLandscapeVariantSkeleton(
             .aspectRatio(1.67F)
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
         ) {
             Row(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxSize()
                     .padding(vertical = 10.dp)
                     .padding(start = 10.dp, end = 12.dp)
             ) {
                 Card(
                     shape = RoundedCornerShape(35.dp),
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxHeight()
                         .aspectRatio(0.67F, matchHeightConstraintsFirst = true)
                 ) {
@@ -247,13 +255,13 @@ fun AnimeLandscapeVariantSkeleton(
                         painter = painterResource(SharedRes.images.placeholder_portrait),
                         contentDescription = "",
                         contentScale = ContentScale.Crop,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxSize()
                     )
                 }
 
                 Column(
-                    modifier = modifier
+                    modifier = Modifier
                         .weight(1F)
                         .padding(start = 16.dp, end = 8.dp)
                 ) {
@@ -262,7 +270,7 @@ fun AnimeLandscapeVariantSkeleton(
                         fontSize = 20.sp,
                         lineHeight = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .background(
                                 color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -270,14 +278,14 @@ fun AnimeLandscapeVariantSkeleton(
                             )
                     )
 
-                    Spacer(modifier = modifier.padding(2.dp))
+                    Spacer(modifier = Modifier.padding(2.dp))
 
                     Text(
                         text = "",
                         fontSize = 20.sp,
                         lineHeight = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .background(
                                 color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -285,14 +293,14 @@ fun AnimeLandscapeVariantSkeleton(
                             )
                     )
 
-                    Spacer(modifier = modifier.padding(4.dp))
+                    Spacer(modifier = Modifier.padding(4.dp))
 
                     Text(
                         text = "",
                         fontSize = 12.sp,
                         lineHeight = 12.sp,
                         fontWeight = FontWeight.Medium,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .background(
                                 color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -300,14 +308,14 @@ fun AnimeLandscapeVariantSkeleton(
                             )
                     )
 
-                    Spacer(modifier = modifier.padding(4.dp))
+                    Spacer(modifier = Modifier.padding(4.dp))
 
                     Text(
                         text = "",
                         fontSize = 20.sp,
                         lineHeight = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .background(
                                 color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -317,7 +325,7 @@ fun AnimeLandscapeVariantSkeleton(
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = modifier
+                        modifier = Modifier
                             .padding(vertical = 8.dp)
                     ) {
                         Image(
@@ -326,12 +334,12 @@ fun AnimeLandscapeVariantSkeleton(
                                 if (isDarkTheme()) starDark else starLight
                             ),
                             contentDescription = "",
-                            modifier = modifier
+                            modifier = Modifier
                         )
 
                         Row(
                             verticalAlignment = Alignment.Bottom,
-                            modifier = modifier
+                            modifier = Modifier
                                 .padding(start = 4.dp)
                         ) {
                             Text(
@@ -339,7 +347,7 @@ fun AnimeLandscapeVariantSkeleton(
                                 fontSize = 16.sp,
                                 lineHeight = 16.sp,
                                 fontWeight = FontWeight.Bold,
-                                modifier = modifier
+                                modifier = Modifier
                                     .width(30.dp)
                                     .background(
                                         color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -347,14 +355,14 @@ fun AnimeLandscapeVariantSkeleton(
                                     )
                             )
 
-                            Spacer(modifier = modifier.width(4.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
 
                             Text(
                                 text = "",
                                 fontSize = 10.sp,
                                 lineHeight = 10.sp,
                                 fontWeight = FontWeight.Medium,
-                                modifier = modifier
+                                modifier = Modifier
                                     .width(60.dp)
                                     .background(
                                         color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -370,7 +378,7 @@ fun AnimeLandscapeVariantSkeleton(
                             fontSize = 12.sp,
                             lineHeight = 12.sp,
                             fontWeight = FontWeight.Medium,
-                            modifier = modifier
+                            modifier = Modifier
                                 .fillMaxWidth()
                                 .background(
                                     color = if (isDarkTheme()) skeletonDark else skeletonLight,
@@ -378,7 +386,7 @@ fun AnimeLandscapeVariantSkeleton(
                                 )
                         )
 
-                        Spacer(modifier = modifier.padding(2.dp))
+                        Spacer(modifier = Modifier.padding(2.dp))
                     }
                 }
             }
