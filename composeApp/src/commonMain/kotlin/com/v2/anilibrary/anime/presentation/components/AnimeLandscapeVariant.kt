@@ -44,13 +44,17 @@ import dev.icerock.moko.resources.compose.painterResource
 @Composable
 fun AnimeLandscapeVariant(
     anime: Anime,
+    onAnimeCardClicked: (animeId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     OutlinedCard(
         shape = RoundedCornerShape(40.dp),
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(1.67F)
+            .aspectRatio(1.67F),
+        onClick = {
+            onAnimeCardClicked(anime.id)
+        }
     ) {
         Box(
             modifier = modifier

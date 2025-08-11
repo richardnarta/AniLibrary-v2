@@ -66,6 +66,7 @@ fun HomeMainScreen(
     state: HomeState,
     drawerState: NavDrawerState,
     onAction: (HomeAction) -> Unit,
+    onAnimeCardClicked: (animeId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState (initialPage = 0) { Int.MAX_VALUE / 2 }
@@ -155,7 +156,8 @@ fun HomeMainScreen(
                                                     .padding(top = 16.dp)
                                             ) { pageIndex ->
                                                 AnimeLandscapeVariant(
-                                                    anime = state.topAiringAnimeResults[pageIndex % state.topAiringAnimeResults.size]
+                                                    anime = state.topAiringAnimeResults[pageIndex % state.topAiringAnimeResults.size],
+                                                    onAnimeCardClicked = onAnimeCardClicked
                                                 )
                                             }
                                         }

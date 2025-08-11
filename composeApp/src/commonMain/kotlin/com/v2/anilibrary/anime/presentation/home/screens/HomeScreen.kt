@@ -60,7 +60,8 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreenRoot(
-    viewModel: HomeViewModel = koinViewModel<HomeViewModel>()
+    viewModel: HomeViewModel = koinViewModel<HomeViewModel>(),
+    onAnimeCardClicked: (animeId: Int) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -72,7 +73,8 @@ fun HomeScreenRoot(
                 else -> Unit
             }
             viewModel.onAction(action)
-        }
+        },
+        onAnimeCardClicked = onAnimeCardClicked,
     )
 }
 
@@ -81,6 +83,7 @@ fun HomeScreenRoot(
 fun HomeScreen(
     state: HomeState,
     onAction: (HomeAction) -> Unit,
+    onAnimeCardClicked: (animeId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState (initialPage = 0) { 3 }
@@ -271,7 +274,7 @@ fun HomeScreen(
                     .fillMaxSize()
             ) {
                 when (pageIndex) {
-                    0 -> HomeMainScreen(state, drawerState, onAction)
+                    0 -> HomeMainScreen(state, drawerState, onAction, onAnimeCardClicked)
                     1 -> HomeNewsScreen()
                     2 -> HomeArchiveScreen()
                 }

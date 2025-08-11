@@ -62,6 +62,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DetailScreenRoot(
+    animeId: Int,
     viewModel: DetailViewModel = koinViewModel<DetailViewModel>()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
