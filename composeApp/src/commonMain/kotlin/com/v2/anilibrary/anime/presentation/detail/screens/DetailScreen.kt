@@ -6,6 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -82,6 +84,7 @@ fun DetailScreenRoot(
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DetailScreen(
     state: DetailState,
@@ -687,31 +690,28 @@ fun DetailScreen(
                     modifier = Modifier
                         .padding(top = 24.dp)
                 )
-            }
 
-            val externalLinks = anime.streamingPlatform!! + anime.externalLinks!!
+                val externalLinks = anime.streamingPlatform!! + anime.externalLinks!!
 
-            LazyRow(
-                contentPadding = PaddingValues(end = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .padding(start = 16.dp)
-                    .fillMaxWidth()
-            ) {
-                items(
-                    count = externalLinks.size
-                ) { index ->
-                    RectangleFilterItem(
-                        text = externalLinks[index].name,
-                        textSize = 12.sp,
-                        fontWeight = FontWeight.Medium,
-                        icon = org.jetbrains.compose.resources.painterResource(Res.drawable.ic_news_24),
-                        iconColorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.background),
-                        onClick = {
-                            uriHandler.openUri(externalLinks[index].url)
-                        }
-                    )
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp, alignment = Alignment.CenterHorizontally),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
+                ) {
+                    externalLinks.forEach { link ->
+                        RectangleFilterItem(
+                            text = if (link.name.startsWith("@")) "Twitter" else link.name,
+                            textSize = 12.sp,
+                            fontWeight = FontWeight.Medium,
+                            icon = org.jetbrains.compose.resources.painterResource(Res.drawable.ic_news_24),
+                            iconColorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.background),
+                            onClick = {
+                                uriHandler.openUri(link.url)
+                            }
+                        )
+                    }
                 }
             }
         }

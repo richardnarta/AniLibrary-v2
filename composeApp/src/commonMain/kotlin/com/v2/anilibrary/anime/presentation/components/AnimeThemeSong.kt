@@ -24,7 +24,7 @@ fun AnimeThemeSong(
     modifier: Modifier = Modifier
 ) {
     val uriHandler = LocalUriHandler.current
-    val youtube = "https://www.youtube.com/results?search_query=${song.song}"
+    val youtube = "https://www.youtube.com/results?search_query=${song.song}+by+${song.singer}"
     val spotify = "https://open.spotify.com/search/${song.song}"
 
     Column (

@@ -220,17 +220,19 @@ fun AnimeReviewItem(
             }
         }
 
-        Text(
-            text = if (isExpanded) "Read Less" else "Read More",
-            color = MaterialTheme.colorScheme.primary,
-            fontWeight = FontWeight.Medium,
-            fontSize = 12.sp,
-            lineHeight = 12.sp,
-            modifier = Modifier
-                .padding(top = 12.dp)
-                .align(Alignment.CenterHorizontally)
-                .clickable { isExpanded = !isExpanded }
-        )
+        if (isOverflowing || isExpanded) {
+            Text(
+                text = if (isExpanded) "Read Less" else "Read More",
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Medium,
+                fontSize = 12.sp,
+                lineHeight = 12.sp,
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .clickable { isExpanded = !isExpanded }
+            )
+        }
 
         HorizontalDivider(
             modifier = Modifier.padding(top = 16.dp),
