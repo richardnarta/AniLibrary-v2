@@ -132,25 +132,29 @@ fun DetailScreen(
                     lineHeight = 26.sp
                 )
 
-                Text(
-                    text = anime.enTitle.toString(),
-                    color = MaterialTheme.colorScheme.onBackground.copy(0.8F),
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 12.sp,
-                    lineHeight = 16.sp,
-                    modifier = Modifier
-                        .padding(top = 2.dp)
-                )
+                if (anime.enTitle != null) {
+                    Text(
+                        text = anime.enTitle,
+                        color = MaterialTheme.colorScheme.onBackground.copy(0.8F),
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 12.sp,
+                        lineHeight = 16.sp,
+                        modifier = Modifier
+                            .padding(top = 2.dp)
+                    )
+                }
 
-                Text(
-                    text = anime.jpTitle.toString(),
-                    color = MaterialTheme.colorScheme.onBackground.copy(0.8F),
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 12.sp,
-                    lineHeight = 16.sp,
-                    modifier = Modifier
-                        .padding(top = 2.dp)
-                )
+                if (anime.jpTitle != null) {
+                    Text(
+                        text = anime.jpTitle,
+                        color = MaterialTheme.colorScheme.onBackground.copy(0.8F),
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 12.sp,
+                        lineHeight = 16.sp,
+                        modifier = Modifier
+                            .padding(top = 2.dp)
+                    )
+                }
             }
 
             Box(
@@ -176,7 +180,7 @@ fun DetailScreen(
                         .padding(horizontal = 16.dp)
                 ) {
                     AnimeWithBadge(
-                        topBadge = anime.airingSeason!!,
+                        topBadge = anime.airingSeason ?: "Coming Soon",
                         bottomBadge = anime.status,
                         imageUrl = anime.images!!,
                         modifier = Modifier
@@ -582,44 +586,49 @@ fun DetailScreen(
                 }
             }
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+            if (anime.songTheme != null &&
+                !anime.songTheme.openings.isNullOrEmpty() &&
+                !anime.songTheme.endings.isNullOrEmpty()
             ) {
-                Text(
-                    text = "Theme Songs",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    lineHeight = 16.sp,
+                Column(
                     modifier = Modifier
-                        .padding(top = 24.dp)
-                )
-
-                anime.songTheme!!.openings!!.map {
-                    AnimeThemeSong(
-                        type = "Op",
-                        song = com.v2.anilibrary.anime.domain.AnimeThemeSong(
-                            song = it.song,
-                            singer = it.singer
-                        ),
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    Text(
+                        text = "Theme Songs",
+                        color = MaterialTheme.colorScheme.onBackground,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        lineHeight = 16.sp,
                         modifier = Modifier
-                            .padding(top = 16.dp)
+                            .padding(top = 24.dp)
                     )
 
-                }
+                    anime.songTheme.openings.map {
+                        AnimeThemeSong(
+                            type = "Op",
+                            song = com.v2.anilibrary.anime.domain.AnimeThemeSong(
+                                song = it.song,
+                                singer = it.singer
+                            ),
+                            modifier = Modifier
+                                .padding(top = 16.dp)
+                        )
 
-                anime.songTheme.endings!!.map {
-                    AnimeThemeSong(
-                        type = "Ed",
-                        song = com.v2.anilibrary.anime.domain.AnimeThemeSong(
-                            song = it.song,
-                            singer = it.singer
-                        ),
-                        modifier = Modifier
-                            .padding(top = 16.dp)
-                    )
+                    }
+
+                    anime.songTheme.endings.map {
+                        AnimeThemeSong(
+                            type = "Ed",
+                            song = com.v2.anilibrary.anime.domain.AnimeThemeSong(
+                                song = it.song,
+                                singer = it.singer
+                            ),
+                            modifier = Modifier
+                                .padding(top = 16.dp)
+                        )
+                    }
                 }
             }
 
